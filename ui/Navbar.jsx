@@ -2,6 +2,7 @@
 import  { useState } from 'react'
 import logo from '@/public/myimg.png'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -23,16 +24,17 @@ const Navbar = () => {
             height={40}
             alt="Vlora.ai Logo"
           />
-          <div className='text-2xl md:text-4xl text-white font-semibold'>
+          <Link href="/"><div className='text-2xl md:text-4xl text-white font-semibold'>
             Vlora.ai
           </div>
+          </Link>
         </div>
 
         {/* Desktop Nav Links */}
         <div className='hidden md:flex text-white gap-8 font-medium'>
-          <div className='cursor-pointer'>About us</div>
-          <div className='cursor-pointer'>Contact</div>
-          <div className='cursor-pointer'>Github</div>
+          <Link href="/about"><div className='cursor-pointer'>About us</div></Link>
+          <Link href="/contact"><div className='cursor-pointer'>Contact</div></Link>
+         <Link href="https://github.com/jenasuraj/Ai-travel-app"><div className='cursor-pointer'>Github</div></Link> 
         </div>
 
         {/* Hamburger Menu Button for Mobile */}
@@ -57,9 +59,9 @@ const Navbar = () => {
 
         {/* Sidebar Links */}
         <div className='flex flex-col items-start gap-6 p-6 text-xl'>
-          <div className='cursor-pointer' onClick={toggleSidebar}>About us</div>
-          <div className='cursor-pointer' onClick={toggleSidebar}>Contact</div>
-          <div className='cursor-pointer' onClick={toggleSidebar}>Github</div>
+        <Link href="/about"> <div className='cursor-pointer' onClick={toggleSidebar}>About us</div></Link> 
+        <Link href="/contact"><div className='cursor-pointer' onClick={toggleSidebar}>Contact</div></Link>
+          <Link href="https://github.com/jenasuraj/Ai-travel-app"><div className='cursor-pointer' onClick={toggleSidebar}>Github</div></Link> 
         </div>
       </div>
     </>
