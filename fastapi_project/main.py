@@ -46,9 +46,9 @@ def FindCity(question):
 def findData(query):
     try:
         city = FindCity(query)
-        print(f"Extracted city: {city}")
+        #print(f"Extracted city: {city}")
 
-        url = f"https://api.unsplash.com/search/photos?query={city}&client_id=nYNA2B7MK1PTQH2fjuaKeV2qj5KK9f__yA_M"
+        url = f"https://api.unsplash.com/search/photos?query={city}&client_id=r0YgDi67MiER4cKKjEE5fSBaP-nh3i486kSpusedhnQ"
         API_response = reqs.get(url)
 
         if API_response.status_code != 200:
@@ -105,7 +105,9 @@ async def read_root(request: QueryRequest):
     image_url = findData(place_name)
     image_url = extract_url(image_url)  # Ensure we only get the URL
 
+
     print(f"Extracted image URL: {image_url}")
+    print(f"Extracted place :{ place_name}" )
     return {
         "image_url": image_url,
         "place_name": FindCity(place_name),
