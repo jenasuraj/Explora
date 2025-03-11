@@ -10,6 +10,12 @@ from langchain.agents import initialize_agent, AgentType
 import requests as reqs
 import re
 
+
+
+
+
+
+
 load_dotenv()
 
 TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
@@ -29,6 +35,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 def FindCity(question):
     prompt = """
     User provided text: {city}.
@@ -46,23 +53,43 @@ def FindCity(question):
 def findData(query):
     try:
         city = FindCity(query)
-        #print(f"Extracted city: {city}")
+        print(f"Extracted city: {city}")
 
-        url = f"https://api.unsplash.com/search/photos?query={city}&client_id=r0YgDi67MiER4cKKjEE5fSBaP-nh3i486kSpusedhnQ"
-        API_response = reqs.get(url)
+        PlaceUrl = f"https://api.unsplash.com/search/photos?query={city}&client_id=r0YgDi67MiER4cKKjEE5fSBaP-nh3i486kSpusedhnQ"
+        Img_API_response = reqs.get(PlaceUrl)
+       
+        WeatherUrl = f"http://api.weatherapi.com/v1/current.json?key=3c068b755e474bc785360809251103&q={city}"
+        Weather_response = reqs.get(WeatherUrl)
+    
 
-        if API_response.status_code != 200:
-            return f"Failed to fetch images for {city}, Status: {API_response.status_code}"
 
-        response_data = API_response.json()
-        if not response_data.get("results"):
-            return f"No images found for {city}."
 
-        first_image_url = response_data["results"][0]["urls"]["full"]
-        return first_image_url
+        if Img_API_response.status_code != 200:
+            return f"Failed to fetch images for {city}, Status: {Img_API_response.status_code}"
+        if Weather_response.status_code != 200:
+            return f"Failed to fetch temperature for {city}, Status: {Weather_response.status_code}"
+
+
+
+        Img_response_data = Img_API_response.json()
+        Weather_response_data  =Weather_response.json()
+
+ #
+
+
+        first_image_url = Img_response_data["results"][0]["urls"]["full"]
+        print(f"image url is {Img_response_data['results'][0]['urls']['full']}")
+
+        first_weather_data = Weather_response_data["current"]["temp_c"]
+        print(f"weather data is {Weather_response_data["current"]["temp_c"]}")
+      
+
+      
+        return  {"weather":first_weather_data,"image":first_image_url}
 
     except Exception as e:
         return f"Error: {e}"
+    
 
 tools = [
     Tool(
@@ -99,17 +126,31 @@ async def read_root(request: QueryRequest):
     data = chain.invoke({"request": request.query})
 
     place_name = data.content.strip()
+
     print(f"AI Suggested Locations: {place_name}")
 
-    # Get the image URL directly from findData
-    image_url = findData(place_name)
-    image_url = extract_url(image_url)  # Ensure we only get the URL
+    # Get the image URL and weather data from findData
+    image_weather = findData(place_name)
+    print(f"final data is  {image_weather}")
 
+    # Check if image_weather is a dictionary or an error string
+    if isinstance(image_weather, str):
+        return {
+            "error": image_weather,
+            "place_name": place_name,
+            "description": data.content,
+        }
+
+    image_url = extract_url(image_weather["image"])  # Ensure we only get the URL
+    temperature = image_weather["weather"]
 
     print(f"Extracted image URL: {image_url}")
-    print(f"Extracted place :{ place_name}" )
+    print(f"Extracted place: {place_name}")
+    print(f"Extracted temperature: {temperature}")
+
     return {
         "image_url": image_url,
         "place_name": FindCity(place_name),
-        "description":data.content
+        "description": data.content,
+        "weather": temperature
     }

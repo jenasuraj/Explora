@@ -19,14 +19,15 @@ const MainPage = () => {
       const response = await axios.post("http://127.0.0.1:8000", { query: data });
 
       // Extracting response data
-      const { image_url, place_name, description } = response.data;
+      const { image_url, place_name, description,weather } = response.data;
       console.log(image_url)
      
 
       setData("");
 
       // Use search params correctly in Next.js
-      router.push(`/dashboard?image_url=${encodeURIComponent(image_url)}&place_name=${encodeURIComponent(place_name)}&description=${encodeURIComponent(description)}`);
+      router.push(`/dashboard?image_url=${encodeURIComponent(image_url)}&place_name=${encodeURIComponent(place_name)}
+      &description=${encodeURIComponent(description)}&weather=${encodeURIComponent(weather)}`);
 
     } catch (error) {
       console.error("Error pushing data to FastAPI:", error);
