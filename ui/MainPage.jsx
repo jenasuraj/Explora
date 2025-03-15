@@ -48,7 +48,7 @@ const MainPage = () => {
       {/* Top div */}
       <div className="w-auto flex flex-col items-center justify-center text-lg md:text-xl lg:text-2xl xl:text-4xl text-center px-4">
         <p className="text-5xl text-sky-500 p-5 font-bold ml-5">
-          Explore one of the best locations on the planet
+          Explore the best locations present on the planet earth
         </p>
         <p className="pb-2 mb-3 text-sm md:text-md lg:text-lg px-4">
           Explore the beauty of the planet, Plan a trip with your partner to explore the globe
