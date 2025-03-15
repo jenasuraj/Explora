@@ -20,7 +20,7 @@ const HeroSection = () => {
       country:"Greece"
     },
     {
-      id:1,
+      id:3,
       img:spain,
       nameOfPlace:"Madrid",
       country:"Spain"
@@ -43,7 +43,7 @@ const HeroSection = () => {
           {items.map( (item)=>
           {
             return(
-              <>
+              
              <div key={item.id} className='flex flex-col justify-center items-center'>
              <Image className='rounded-bl-md'
               src={item.img}
@@ -54,7 +54,7 @@ const HeroSection = () => {
               <p className='mt-2'>{item.nameOfPlace}</p>
               <p className='text-xl font-bold text-sky-500'>{item.country}</p>
              </div>
-              </>
+            
             )
           } )}
               

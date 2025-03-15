@@ -12,10 +12,6 @@ import re
 
 
 
-
-
-
-
 load_dotenv()
 
 TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
@@ -38,23 +34,43 @@ app.add_middleware(
 
 def FindCity(question):
     prompt = """
-    User provided text: {city}.
-    Extract only the name of the place and country from the text.
-    Response like:  "place name,country" 
+    Extract only ONE city and country name from the given input.
+    - Do NOT provide any additional details or explanations.
+    - Return the city and country in this exact format: City, Country
+    - If multiple cities are mentioned, choose the most relevant one.
+    
+    Example:
+    Input: "I want to visit Paris."
+    Output: "Paris, France"
+    
+    Input: "Tell me about the Statue of Liberty."
+    Output: "New York, USA"
+    
+    Input: "{city}"
+    Output:
     """
     try:
         prompt = PromptTemplate.from_template(prompt)
         chain = prompt | model
         response = chain.invoke({"city": question})
-        return response.content.strip()
+        
+        extracted_city = response.content.strip()
+        
+        # Ensure the output is strictly "City, Country" by using regex
+        match = re.search(r"([A-Za-z\s]+),\s*([A-Za-z\s]+)", extracted_city)
+        if match:
+            return f"{match.group(1).strip()}, {match.group(2).strip()}"
+        else:
+            return "Error: Could not extract city, country properly."
+    
     except Exception as e:
         return f"Error extracting city: {e}"
+
+
 
 def findData(query):
     try:
         city = FindCity(query)
-        print(f"Extracted city: {city}")
-
         PlaceUrl = f"https://api.unsplash.com/search/photos?query={city}&client_id=r0YgDi67MiER4cKKjEE5fSBaP-nh3i486kSpusedhnQ"
         Img_API_response = reqs.get(PlaceUrl)
        
@@ -78,11 +94,13 @@ def findData(query):
 
 
         first_image_url = Img_response_data["results"][0]["urls"]["full"]
-        print(f"image url is {Img_response_data['results'][0]['urls']['full']}")
+       
 
         first_weather_data = Weather_response_data["current"]["temp_c"]
-        print(f"weather data is {Weather_response_data["current"]["temp_c"]}")
       
+        print(f"image link is {Img_response_data["results"][0]["urls"]["full"]}")
+        print(f"weather link is {Weather_response_data["current"]["temp_c"]}")
+
 
       
         return  {"weather":first_weather_data,"image":first_image_url}
@@ -91,20 +109,6 @@ def findData(query):
         return f"Error: {e}"
     
 
-tools = [
-    Tool(
-        name="resourceFinder",
-        func=findData,
-        description="Use this tool to find images of places. Return only the image URL."
-    ),
-]
-
-agent = initialize_agent(
-    tools,
-    model,
-    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=True
-)
 
 def extract_url(text):
     """Extract URL from text if present, otherwise return the original text"""
@@ -131,7 +135,7 @@ async def read_root(request: QueryRequest):
 
     # Get the image URL and weather data from findData
     image_weather = findData(place_name)
-    print(f"final data is  {image_weather}")
+ 
 
     # Check if image_weather is a dictionary or an error string
     if isinstance(image_weather, str):
@@ -144,13 +148,17 @@ async def read_root(request: QueryRequest):
     image_url = extract_url(image_weather["image"])  # Ensure we only get the URL
     temperature = image_weather["weather"]
 
-    print(f"Extracted image URL: {image_url}")
-    print(f"Extracted place: {place_name}")
-    print(f"Extracted temperature: {temperature}")
+    cityData = FindCity(place_name)
+
+    print(f"Extracted city: {cityData}")
+    print(f"Extracted image: {image_url}")
+    print(f"Extracted description: {data.content}")
+    print(f"Extracted weather: {temperature}")
+
 
     return {
         "image_url": image_url,
-        "place_name": FindCity(place_name),
+        "place_name":cityData,
         "description": data.content,
         "weather": temperature
     }

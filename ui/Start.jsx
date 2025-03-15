@@ -24,8 +24,6 @@ const Start = () => {
         /> 
 
     </div>
-
-
     </div>
   )
 }

@@ -20,7 +20,13 @@ const MainPage = () => {
 
       // Extracting response data
       const { image_url, place_name, description,weather } = response.data;
-      console.log(image_url)
+      //console.log(image_url)
+       
+      console.log("FROM MAINPAGE")
+      console.log("Extracted city"+{place_name})
+      console.log("Extracted image:"+ {image_url})
+      console.log("Extracted description"+ {description})
+      console.log("Extracted weather:"+{weather})
      
 
       setData("");
