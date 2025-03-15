@@ -71,10 +71,12 @@ def FindCity(question):
 def findData(query):
     try:
         city = FindCity(query)
+        print(f"Extracted city: {city}")
+
         PlaceUrl = f"https://api.unsplash.com/search/photos?query={city}&client_id=r0YgDi67MiER4cKKjEE5fSBaP-nh3i486kSpusedhnQ"
         Img_API_response = reqs.get(PlaceUrl)
        
-        WeatherUrl = f"http://api.weatherapi.com/v1/current.json?key=3c068b755e474bc785360809251103&q={city}"
+        WeatherUrl = f"http://api.weatherapi.com/v1/current.json?key=3c068b755e474bc5360809251103&q={city}"
         Weather_response = reqs.get(WeatherUrl)
     
 
