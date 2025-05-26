@@ -1,166 +1,139 @@
-import os
 from fastapi import FastAPI
-from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from langchain.chat_models import init_chat_model
-from dotenv import load_dotenv
+from pydantic import BaseModel
+from typing import Annotated
+from typing_extensions import TypedDict
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
-from langchain.tools import Tool
-from langchain.agents import initialize_agent, AgentType
-import requests as reqs
-import re
-
-
-
+from dotenv import load_dotenv
+import os
 load_dotenv()
 
-TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
-
-model = init_chat_model("mistralai/Mixtral-8x7B-Instruct-v0.1", model_provider="together")
 
 app = FastAPI()
-
-class QueryRequest(BaseModel):
-    query: str
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+class UserData(BaseModel):
+    total_days : str
+    destination: str
+    travel_type: str
 
-def FindCity(question):
-    prompt = """
-    Extract only ONE city and country name from the given input.
-    - Do NOT provide any additional details or explanations.
-    - Return the city and country in this exact format: City, Country
-    - If multiple cities are mentioned, choose the most relevant one.
-    
-    Example:
-    Input: "I want to visit Paris."
-    Output: "Paris, France"
-    
-    Input: "Tell me about the Statue of Liberty."
-    Output: "New York, USA"
-    
-    Input: "{city}"
-    Output:
-    """
-    try:
-        prompt = PromptTemplate.from_template(prompt)
-        chain = prompt | model
-        response = chain.invoke({"city": question})
-        
-        extracted_city = response.content.strip()
-        
-        # Ensure the output is strictly "City, Country" by using regex
-        match = re.search(r"([A-Za-z\s]+),\s*([A-Za-z\s]+)", extracted_city)
-        if match:
-            return f"{match.group(1).strip()}, {match.group(2).strip()}"
-        else:
-            return "Error: Could not extract city, country properly."
-    
-    except Exception as e:
-        return f"Error extracting city: {e}"
+llm = ChatOpenAI(
+    model="openai/gpt-4o-mini",
+    openai_api_key=os.getenv("OPENROUTER_API_KEY"),
+    openai_api_base="https://openrouter.ai/api/v1",
+    default_headers={
+        "HTTP-Referer": "http://localhost",
+        "X-Title": "LangGraph Travel Planner"
+    },
+    temperature=0.7,
+   max_tokens=3000 , # or higher depending on your usage plan
+
+)
 
 
 
-def findData(query):
-    try:
-        city = FindCity(query)
-        print(f"Extracted city: {city}")
-
-        PlaceUrl = f"https://api.unsplash.com/search/photos?query={city}&client_id=r0YgDi67MiER4cKKjEE5fSBaP-nh3i486kSpusedhnQ"
-        Img_API_response = reqs.get(PlaceUrl)
-       
-        WeatherUrl = f"http://api.weatherapi.com/v1/current.json?key=3c068b755e474bc5360809251103&q={city}"
-        Weather_response = reqs.get(WeatherUrl)
-    
+class State(TypedDict):
+    destination:str
+    total_days:str
+    travel_type:str
+    final:str
 
 
-
-        if Img_API_response.status_code != 200:
-            return f"Failed to fetch images for {city}, Status: {Img_API_response.status_code}"
-        if Weather_response.status_code != 200:
-            return f"Failed to fetch temperature for {city}, Status: {Weather_response.status_code}"
+graph_builder = StateGraph(State)
 
 
+prompt = PromptTemplate.from_template("""
+You are a travel planner. Create a detailed day-by-day itinerary for a {travel_type} trip to {destination} lasting {total_days} days.
 
-        Img_response_data = Img_API_response.json()
-        Weather_response_data  =Weather_response.json()
+Each day must include the following sections, with both the name and a short description for each:
 
- #
+- **Breakfast**
+  - "Restaurant": Name of the recommended restaurant or café
+  - "Description": A brief description about the place and why it's recommended
+
+- **Morning Activity**
+  - "Place": Name of the attraction or activity
+  - "Description": A short background or reason to visit
+
+- **Lunch**
+  - "Restaurant": Name of the recommended restaurant
+  - "Description": Short explanation of cuisine/type and reason to try it
+
+- **Afternoon Activity**
+  - "Place": Name of the location or experience
+  - "Description": A brief explanation of what to do or see there
+
+- **Dinner**
+  - "Restaurant": Name of the dinner spot
+  - "Description": Highlight what makes it a good choice for the evening
+
+Return the itinerary as a JSON object structured like this:
+
+{{
+  "Day 1": {{
+    "Breakfast": {{
+      "Restaurant": "...",
+      "Description": "..."
+    }},
+    "Morning Activity": {{
+      "Place": "...",
+      "Description": "..."
+    }},
+    "Lunch": {{
+      "Restaurant": "...",
+      "Description": "..."
+    }},
+    "Afternoon Activity": {{
+      "Place": "...",
+      "Description": "..."
+    }},
+    "Dinner": {{
+      "Restaurant": "...",
+      "Description": "..."
+    }}
+  }},
+  ...
+}}
+""")
+
+chain = prompt | llm
+def chatbot(state: State):
+    response = chain.invoke({
+        "destination":state["destination"],
+        "total_days":state["total_days"],
+        "travel_type":state["travel_type"]
+    })
+    print("data is ",response.content)
+    return {"final":response.content}
+   
 
 
-        first_image_url = Img_response_data["results"][0]["urls"]["full"]
-       
+graph_builder.add_node("chatbot", chatbot)
+graph_builder.add_edge(START, "chatbot")
+graph_builder.add_edge("chatbot",END)
+graph = graph_builder.compile()
 
-        first_weather_data = Weather_response_data["current"]["temp_c"]
-      
-        print(f"image link is {Img_response_data["results"][0]["urls"]["full"]}")
-        print(f"weather link is {Weather_response_data["current"]["temp_c"]}")
-
-
-      
-        return  {"weather":first_weather_data,"image":first_image_url}
-
-    except Exception as e:
-        return f"Error: {e}"
-    
-
-
-def extract_url(text):
-    """Extract URL from text if present, otherwise return the original text"""
-    url_pattern = r'https?://[^\s]+'
-    match = re.search(url_pattern, text)
-    return match.group(0) if match else text
 
 @app.post("/")
-async def read_root(request: QueryRequest):
-    promptData = """
-    You are a helpful travel AI assistant.
-    User request :{request}.
-    Based on the User request, suggest 1 best location with location name along with it's country.
-    Just provide the place name along with it's country like for example 'tajmahal,india'
-    """
-
-    prompt = PromptTemplate.from_template(promptData)
-    chain = prompt | model
-    data = chain.invoke({"request": request.query})
-
-    place_name = data.content.strip()
-
-    print(f"AI Suggested Locations: {place_name}")
-
-    # Get the image URL and weather data from findData
-    image_weather = findData(place_name)
- 
-
-    # Check if image_weather is a dictionary or an error string
-    if isinstance(image_weather, str):
-        return {
-            "error": image_weather,
-            "place_name": place_name,
-            "description": data.content,
-        }
-
-    image_url = extract_url(image_weather["image"])  # Ensure we only get the URL
-    temperature = image_weather["weather"]
-
-    cityData = FindCity(place_name)
-
-    print(f"Extracted city: {cityData}")
-    print(f"Extracted image: {image_url}")
-    print(f"Extracted description: {data.content}")
-    print(f"Extracted weather: {temperature}")
-
-
-    return {
-        "image_url": image_url,
-        "place_name":cityData,
-        "description": data.content,
-        "weather": temperature
+async def receive(data: UserData):
+    print("date for",data.total_days)
+    initial_state = {
+        "destination": data.destination,
+        "total_days": data.total_days,
+        "travel_type": data.travel_type
     }
+    result = graph.invoke(initial_state)
+    return result
+
+   
+
+    
