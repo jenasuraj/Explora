@@ -35,18 +35,18 @@ This project uses LangChain to intelligently suggest the best travel destination
 
 ---
 
-## 🚀 Getting Started
-# Clone the repo
+# 🚀 Getting Started
+## Clone the repo
 git clone git@github.com:jenasuraj/Ai-TravelPlanner-app.git
 
 
-# required dependencies front end
+## required dependencies front end
 npx create-next-app@latest next-frontend<br/>
 cd next-frontend<br/>
 npm run dev
 
 
-# required dependencies for Express  
+## required dependencies for Express  
 mkdir express-backend<br/>
 cd express-backend<br/>
 npm init -y<br/>
@@ -54,11 +54,12 @@ npm install express cors dotenv<br/>
 node index.js
 
 
-# required dependencies for fastapi
+## required dependencies for fastapi
 python -m venv venv<br/>
 source venv/bin/activate<br/> 
 pip install fastapi uvicorn<br/>
 uvicorn main:app --reload<br/>
-Your FastAPI server runs at http://127.0.0.1:8000
+<br/>
+Your FastAPI server will run at http://127.0.0.1:8000
 
 ```
