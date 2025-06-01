@@ -1,6 +1,3 @@
-![My Image](./assets/screenshot.png)
-
-
 <h1 align="center">🚀 Ai travel planner</h1>
 
 <p align="center">
@@ -9,6 +6,9 @@
 </p>
 
 ---
+
+![My Image](./assets/screenshot.png)
+
 
 ## 🧠 About
 
