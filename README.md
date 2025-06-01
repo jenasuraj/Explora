@@ -1,10 +1,6 @@
 ![My Image](./assets/screenshot.png)
 
 
-<p align="center">
-  <img src="assets/screenshot.png" alt="Banner" width="600" />
-</p>
-
 <h1 align="center">🚀 Ai travel planner</h1>
 
 <p align="center">
