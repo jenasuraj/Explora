@@ -41,9 +41,9 @@ git clone git@github.com:jenasuraj/Ai-TravelPlanner-app.git
 
 
 # required dependencies front end
--npx create-next-app@latest next-frontend
--cd next-frontend
--npm run dev
+npx create-next-app@latest next-frontend<br/>
+cd next-frontend<br/>
+npm run dev
 
 
 # required dependencies for Express  
