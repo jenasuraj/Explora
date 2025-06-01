@@ -47,18 +47,18 @@ npm run dev
 
 
 # required dependencies for Express  
-mkdir express-backend
-cd express-backend
-npm init -y
-npm install express cors dotenv
+mkdir express-backend<br/>
+cd express-backend<br/>
+npm init -y<br/>
+npm install express cors dotenv<br/>
 node index.js
 
 
 # required dependencies for fastapi
-python -m venv venv
-source venv/bin/activate 
-pip install fastapi uvicorn
-uvicorn main:app --reload
+python -m venv venv<br/>
+source venv/bin/activate<br/> 
+pip install fastapi uvicorn<br/>
+uvicorn main:app --reload<br/>
 Your FastAPI server runs at http://127.0.0.1:8000
 
 ```
