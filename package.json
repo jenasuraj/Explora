@@ -9,7 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.6.0",
+    "aos": "^2.3.4",
     "axios": "^1.8.1",
+    "lottie-react": "^2.4.1",
+    "mysql2": "^3.14.1",
     "next": "15.2.1",
     "postcss": "^8.5.3",
     "react": "^19.0.0",

@@ -1,54 +1,16 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-from typing import Annotated
 from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
-from langgraph.graph.message import add_messages
-from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
-from dotenv import load_dotenv
-import os
-load_dotenv()
-
-
-app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-class UserData(BaseModel):
-    total_days : str
-    destination: str
-    travel_type: str
-
-llm = ChatOpenAI(
-    model="openai/gpt-4o-mini",
-    openai_api_key=os.getenv("OPENROUTER_API_KEY"),
-    openai_api_base="https://openrouter.ai/api/v1",
-    default_headers={
-        "HTTP-Referer": "http://localhost",
-        "X-Title": "LangGraph Travel Planner"
-    },
-    temperature=0.7,
-   max_tokens=3000 , # or higher depending on your usage plan
-
-)
+from models.user import llm
 
 
 
 class State(TypedDict):
-    destination:str
-    total_days:str
-    travel_type:str
-    final:str
+    destination: str
+    total_days: str
+    travel_type: str
+    final: str
 
-
-graph_builder = StateGraph(State)
 
 
 prompt = PromptTemplate.from_template("""
@@ -106,34 +68,17 @@ Return the itinerary as a JSON object structured like this:
 """)
 
 chain = prompt | llm
+
 def chatbot(state: State):
     response = chain.invoke({
-        "destination":state["destination"],
-        "total_days":state["total_days"],
-        "travel_type":state["travel_type"]
+        "destination": state["destination"],
+        "total_days": state["total_days"],
+        "travel_type": state["travel_type"]
     })
-    print("data is ",response.content)
-    return {"final":response.content}
-   
+    return {"final": response.content}
 
-
+graph_builder = StateGraph(State)
 graph_builder.add_node("chatbot", chatbot)
 graph_builder.add_edge(START, "chatbot")
-graph_builder.add_edge("chatbot",END)
+graph_builder.add_edge("chatbot", END)
 graph = graph_builder.compile()
-
-
-@app.post("/")
-async def receive(data: UserData):
-    print("date for",data.total_days)
-    initial_state = {
-        "destination": data.destination,
-        "total_days": data.total_days,
-        "travel_type": data.travel_type
-    }
-    result = graph.invoke(initial_state)
-    return result
-
-   
-
-    
