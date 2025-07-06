@@ -1,4 +1,4 @@
-import Section4 from '@/ui/Section4'
+import Section4 from '@/components/home/Section4'
 import React from 'react'
 
 const page = () => {

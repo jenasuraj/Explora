@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import Section2 from '@/ui/Section2'
-import Section3 from '@/ui/Section3'
+import Section2 from '@/components/home/Section2'
+import Section3 from '@/components/home/Section3'
 const page = () => {
   return (
    <>
