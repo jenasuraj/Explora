@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Form from "@/ui/Form";
+import Form from "@/components/Form";
 import Loader from "./Loader";
 import JourneySection from "./JourneySection";
 import ChatBot from "./ChatBot";

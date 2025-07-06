@@ -1,4 +1,4 @@
-import DataPushing from "@/ui/DataPushing";
+import DataPushing from "@/components/DataPushing";
 
 const Page = () => {
   

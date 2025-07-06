@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import ItineraryDayCard from "@/ui/ItineraryDayCard";
+import ItineraryDayCard from "@/components/ItineraryDayCard";
 import axios from "axios";
 
 const OperationSlugPage = () => {

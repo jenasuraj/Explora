@@ -3,8 +3,8 @@
 import { MdOutlineFreeBreakfast, MdDinnerDining, MdOutlineHiking } from "react-icons/md";
 import { GiHotMeal } from "react-icons/gi";
 import { BsPersonWalking } from "react-icons/bs";
-import MealCard from "@/ui/MealCard";
-import ActivityCard from "@/ui/ActivityCard";
+import MealCard from "@/components/MealCard";
+import ActivityCard from "@/components/ActivityCard";
 
 
 const ItineraryDayCard = ({ dayKey, day, images, destination }) => {

@@ -1,5 +1,5 @@
 
-import BlackDiv from "@/ui/BlackDiv";
+import BlackDiv from "@/components/BlackDiv";
 export default function AboutLayout({ children }) {
   return (
     <>
