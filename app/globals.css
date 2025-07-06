@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+
+@keyframes scroll-left-to-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-scroll-x {
+  animation: scroll-left-to-right 20s linear infinite;
+}
