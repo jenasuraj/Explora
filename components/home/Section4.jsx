@@ -6,7 +6,7 @@ const Section4 = () => {
       <section className="min-h-[50vh] w-full bg-gradient-to-b mt-10 px-8 py-20 text-white md:min-h-screen lg:min-h-[70vh]" data-aos="fade-up"
      data-aos-duration="3000">
         <article className="max-w-5xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 text-black">Why Choose Vlora.ai?</h2>
+          <h2 className="text-4xl font-bold mb-6 text-black">Why Choose Explora.ai?</h2>
           <p className="text-lg mb-8 leading-relaxed text-black">
             Our AI understands your preferences, budget, and travel history to suggest destinations
             that are uniquely tailored to you. Whether it's a relaxing getaway or an adventurous escape,

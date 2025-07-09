@@ -4,15 +4,10 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
 class UserData(BaseModel):
-    total_days: str
-    destination: str
-    travel_type: str
- 
-
-class TextData(BaseModel):
-    inputData: str
+    description: str
+    days: str
+    radius: str
 
 llm = ChatOpenAI(
     model="openai/gpt-4o-mini",
