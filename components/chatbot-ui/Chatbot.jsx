@@ -33,6 +33,9 @@ const Chatbot = () => {
       console.log("Error while sending data to FastAPI", error);
       setErrorMessage("Server error. Try again later.");
     }
+    setFormData.radius('')
+    setFormData.description('')
+    setFormData.radius('')
   };
 
   useEffect(() => {
