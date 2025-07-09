@@ -1,16 +1,16 @@
 from fastapi import APIRouter
 from models.user import UserData
-from services.langgraph_chain import graph
-from models.user import text_llm
+from llm_workflow.workflow import graph
 from langchain_core.messages import HumanMessage
 
 router = APIRouter()
 
 @router.post("/")
 async def receive(data: UserData):
-    print("data is",data.days)
+    print("data is",data.description)
+    user_data = f"user wants:{data.description} for {data.days}, but the distance and plan should be happen within {data.radius}"
     initial_state = {
-        "messages": [HumanMessage(content=data.inputData)],
+        "messages": [HumanMessage(content=user_data)],
                    }
     result = graph.invoke(initial_state)
     return result
