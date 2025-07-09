@@ -1,12 +1,11 @@
-import DataPushing from "@/components/DataPushing";
-
-const Page = () => {
-  
+import React from 'react'
+import Chatbot from '@/components/chatbot-ui/Chatbot'
+const page = () => {
   return (
     <>
-   <DataPushing/>
+    <Chatbot/>
     </>
-  );
-};
+  )
+}
 
-export default Page;
+export default page

@@ -5,10 +5,10 @@ import Section4 from "@/components/home/Section4";
 
 
 export const metadata = {
-  title: "Vlora.ai - Smart Travel Destination Picker",
-  description: "Let our smartest AI pick your perfect destination and experience travel the smarter way with Vlora.ai.",
-  keywords: ["AI travel", "smart travel", "travel destination", "Vlora.ai", "travel planning"],
-  authors: [{ name: "Vlora.ai Team" }],
+  title: "Explora.ai - Smart Travel Destination Picker",
+  description: "Let our smartest AI pick your perfect destination and experience travel the smarter way with Explora.ai.",
+  keywords: ["AI travel", "smart travel", "travel destination", "Expora.ai", "travel planning"],
+  authors: [{ name: "Explora.ai Team" }],
 };
 
 export default function Home() {

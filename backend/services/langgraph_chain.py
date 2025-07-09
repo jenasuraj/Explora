@@ -2,15 +2,20 @@ from typing_extensions import TypedDict
 from langgraph.graph import StateGraph, START, END
 from langchain_core.prompts import PromptTemplate
 from models.user import llm
+from typing import Annotated
+from langgraph.graph.message import add_messages
+from langchain_core.messages import HumanMessage,AIMessage
 
-
-
+"""
 class State(TypedDict):
     destination: str
     total_days: str
     travel_type: str
     final: str
 
+"""
+class State(TypedDict):
+    messages: Annotated[list, add_messages]
 
 
 prompt = PromptTemplate.from_template("""
@@ -70,12 +75,12 @@ Return the itinerary as a JSON object structured like this:
 chain = prompt | llm
 
 def chatbot(state: State):
-    response = chain.invoke({
-        "destination": state["destination"],
-        "total_days": state["total_days"],
-        "travel_type": state["travel_type"]
-    })
-    return {"final": response.content}
+  
+    query = state["messages"][0].content
+    print("the query is",query)
+    response = llm.invoke(query)
+    print("response is",response.content) 
+    return {"messages":state["messages"]+[AIMessage(content=response.content)]}
 
 graph_builder = StateGraph(State)
 graph_builder.add_node("chatbot", chatbot)
