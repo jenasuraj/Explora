@@ -33,17 +33,22 @@ const Chatbot = () => {
       console.log("Error while sending data to FastAPI", error);
       setErrorMessage("Server error. Try again later.");
     }
-    setFormData.radius('')
-    setFormData.description('')
-    setFormData.radius('')
   };
+
+if (response)
+{
+const obj = JSON.parse(response.final_data);
+console.log("Parsed object:", obj);
+console.log("Now the type is", typeof obj); // 'object'
+}
+
 
   useEffect(() => {
     const now = new Date();
     const hour = now.getHours();
-    if (hour < 12 && hour >= 5) setTimeGreeting('Good Morning');
-    else if (hour >= 12 && hour < 17) setTimeGreeting('Good Afternoon');
-    else if (hour >= 17 && hour < 24) setTimeGreeting('Good Evening');
+    if (hour < 12 && hour >= 5) setTimeGreeting('Good Morning ⛅');
+    else if (hour >= 12 && hour < 17) setTimeGreeting('Good Afternoon 🌞');
+    else if (hour >= 17 && hour < 24) setTimeGreeting('Good Evening 🌙');
     else setTimeGreeting("It's Night Time");
   }, []);
 
@@ -58,7 +63,7 @@ const Chatbot = () => {
     <section className="w-full min-h-screen p-6 flex justify-center items-center">
       <div className="shadow-lg flex justify-center items-center gap-5 flex-col px-6 py-6 w-full min-h-[50vh] border border-gray-300 rounded-4xl bg-white mb-30 lg:w-1/2">
         <header className="text-4xl text-center">
-          Hey there, {timeGreeting} 🌿
+          Hey there, {timeGreeting} 
         </header>
         <p className="text-md text-center">
           Got confused where to go? Don't worry, I am here to help. Just give me a command!
@@ -90,7 +95,7 @@ const Chatbot = () => {
         </div>
 
         <button
-          className="cursor-pointer w-full h-auto bg-black text-white p-2 hover:bg-white hover:text-black hover:border hover:border-black"
+          className="cursor-pointer w-full h-auto bg-black text-white p-2 hover:bg-white hover:text-black hover:border hover:border-black "
           onClick={handleClick}
         >
           Let's go
