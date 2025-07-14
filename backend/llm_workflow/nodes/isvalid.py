@@ -14,7 +14,6 @@ prompt = PromptTemplate.from_template(mainPrompt)
 chain = prompt | groq_llm
 def isValid(state:State):
     user = state["messages"][0].content 
-    print("user query is",user)  
     response = chain.invoke({"user":user})
     return{
         "messages":state["messages"]+[AIMessage(content=response.content)]

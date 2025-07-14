@@ -13,4 +13,6 @@ async def receive(data: UserData):
         "messages": [HumanMessage(content=user_data)],
                    }
     result = graph.invoke(initial_state)
-    return result
+    final_data = result["messages"][-1].content
+    print("final data is",final_data)
+    return {"final_data":final_data}
