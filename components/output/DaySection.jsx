@@ -5,7 +5,6 @@ import { GrLocation } from "react-icons/gr";
 import { MdFlight } from "react-icons/md";
 import { PiBroadcast, PiKeyReturnLight } from "react-icons/pi";
 import { SiTicktick } from "react-icons/si";
-import img from '@/assets/sample.png'
 import { MdHotel } from "react-icons/md";
 import { IoRestaurant } from "react-icons/io5";
 import FetchImages from './FetchImages';
@@ -89,7 +88,7 @@ const DaySection = ({ showDates, final_data, showIndex }) => {
              </p>
 
                 </div>
-                <p className="text-gray-600">{item.description}</p>
+                <p className="text-gray-600 mt-5">{item.description}</p>
                 {item.distance_from_previous_km && (
                   <p className="text-sm text-gray-500">
                     Distance from previous place:{" "}

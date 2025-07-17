@@ -9,6 +9,7 @@ const Chatbot = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [response, setResponse] = useState('');
   const [timeGreeting, setTimeGreeting] = useState('');
+  const [loading,setLoading] = useState(false)
   const [formData, setFormData] = useState({
     description: '',
     days: '',
@@ -23,6 +24,7 @@ const Chatbot = () => {
   };
 
   const handleClick = async () => {
+    setLoading(true)
     if (!formData.description || !formData.days || !formData.radius) {
       setErrorMessage('Please fill in all fields!');
       return;  
@@ -37,10 +39,12 @@ const Chatbot = () => {
     }
   };
 
-if (response)
-{
- router.push(`/operation/etc?data=${encodeURIComponent(response.final_data)}`);
-}
+useEffect(() => {
+  if (response) {
+    setLoading(false); 
+    router.push(`/operation/etc?data=${encodeURIComponent(response.final_data)}`);
+  }
+}, [response]);
 
 
   useEffect(() => {
@@ -61,6 +65,14 @@ if (response)
 
   
   return (
+   <>
+   {loading && (
+  <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white/80 backdrop-blur-sm">
+    <div className="w-16 h-16 border-4 border-gray-300 border-t-black rounded-full animate-spin mb-4"></div>
+    <p className="text-xl font-semibold text-black">Generating your plan...</p>
+  </div>
+    )}
+
     <section className="w-full min-h-screen p-6 flex justify-center items-center">
       <div className="shadow-lg flex justify-center items-center gap-5 flex-col px-6 py-6 w-full min-h-[50vh] border border-gray-300 rounded-4xl bg-white mb-30 lg:w-1/2">
         <header className="text-4xl text-center">
@@ -105,6 +117,7 @@ if (response)
         {errorMessage && <p className="text-red-600">{errorMessage}</p>}
       </div>
     </section>
+   </>
   );
 };
 
