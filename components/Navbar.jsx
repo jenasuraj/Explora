@@ -14,13 +14,13 @@ const pathname = usePathname()
 
   return (
     <>
-   <Link href="/">
-   <ul className="text-xl  ml-2">Explora.ai🌿</ul></Link>
+   <Link href="/"><ul className="text-xl  ml-2">Explora.ai🌿</ul></Link>
             <button
                 className="md:hidden text-white text-2xl mr-2"
                 onClick={() => setIsOpen(!isOpen)}>
                 ☰
               </button>     
+              
               <ul
                 className={`${
                   isOpen ? "block" : "hidden"
@@ -62,10 +62,8 @@ const pathname = usePathname()
                     Contact
                   </button>
                 </li>
-                </Link>
+                </Link> 
 
-
-                
               </ul>
     </>
   )

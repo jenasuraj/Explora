@@ -64,7 +64,7 @@ You are a data structuring assistant. Your task is to convert the given human-re
     "Try Odia cuisine like dalma and besara",
     "Relax at Puri beach or Chilika Lake"
   ]
-
+  Important : Make sure the description in places should be atleast 2-3 lines, and also dont only add the name i.e place:Bhubaneshwar !its wrong. You better have to add the country name as well i.e ex: place:bhubaneshwar,india.
   User input:{input}.
 }}"""
 

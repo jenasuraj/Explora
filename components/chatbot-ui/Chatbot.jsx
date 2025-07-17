@@ -1,9 +1,11 @@
 "use client"
-
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+
 const Chatbot = () => {
+  const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
   const [response, setResponse] = useState('');
   const [timeGreeting, setTimeGreeting] = useState('');
@@ -37,9 +39,7 @@ const Chatbot = () => {
 
 if (response)
 {
-const obj = JSON.parse(response.final_data);
-console.log("Parsed object:", obj);
-console.log("Now the type is", typeof obj); // 'object'
+ router.push(`/operation/etc?data=${encodeURIComponent(response.final_data)}`);
 }
 
 
@@ -57,8 +57,9 @@ console.log("Now the type is", typeof obj); // 'object'
       const lastMessage = response.messages[response.messages.length - 1]?.content;
       if (lastMessage) console.log(lastMessage);
     }
-  }, [response]);
+  },[response]);
 
+  
   return (
     <section className="w-full min-h-screen p-6 flex justify-center items-center">
       <div className="shadow-lg flex justify-center items-center gap-5 flex-col px-6 py-6 w-full min-h-[50vh] border border-gray-300 rounded-4xl bg-white mb-30 lg:w-1/2">

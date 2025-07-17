@@ -8,7 +8,6 @@ import re
 
 def final(state: State):
     raw_response = state["messages"][-1].content
-    
     match = re.search(r"```json\s*(.*?)\s*```", raw_response, re.DOTALL)
     if not match:
         raise ValueError("❌ No JSON block found in the input.")
@@ -23,9 +22,7 @@ def final(state: State):
         return {
             "messages": state["messages"] + [AIMessage(content=stringified_output)]
         }
-
     except json.JSONDecodeError as e:
-        # Optional: Log or return error message
         error_message = f"❌ JSON decoding failed: {str(e)}"
         print(error_message)
         return {
