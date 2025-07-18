@@ -11,7 +11,7 @@ const FetchImages = ({ item }) => {
   const fetchImage = async (place) => {
     try {
       const response = await axios.get(
-        `https://api.unsplash.com/search/photos?query=${place}&client_id=HjjcaW6zk8jbdFiPm-oeNGbBKXCYdJMVv1XaUctiR28`
+        `https://api.unsplash.com/search/photos?query=${place}&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_API_KEY }`
       )
       const result = response.data.results[0]?.urls?.raw
       setImgUrl(result || fallbackImg)
@@ -26,17 +26,18 @@ const FetchImages = ({ item }) => {
   }, [item])
 
   return (
-    <>
-      {imgUrl && (
+    <> 
         <div className="relative aspect-[3/2] w-full rounded-lg overflow-hidden">
-          <Image
+         {imgUrl ?(
+           <Image
             src={imgUrl}
             alt="place"
             fill
             className="object-cover"
           />
+         ):<p>Loading image</p>}
         </div>
-      )}
+  
     </>
   )
 }

@@ -41,7 +41,6 @@ const Chatbot = () => {
 
 useEffect(() => {
   if (response) {
-    setLoading(false); 
     router.push(`/operation/etc?data=${encodeURIComponent(response.final_data)}`);
   }
 }, [response]);
