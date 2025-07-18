@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import axios from 'axios'
-import fallbackImg from '@/assets/sample.png' // static image
+import fallbackImg from '@/assets/sample.png'
 
 const FetchImages = ({ item }) => {
   const [imgUrl, setImgUrl] = useState(null)
@@ -27,7 +27,7 @@ const FetchImages = ({ item }) => {
 
   return (
     <> 
-        <div className="relative aspect-[3/2] w-full rounded-lg overflow-hidden">
+      <div className="relative aspect-[3/2] w-full rounded-lg overflow-hidden">
          {imgUrl ?(
            <Image
             src={imgUrl}
@@ -37,7 +37,6 @@ const FetchImages = ({ item }) => {
           />
          ):<p>Loading image</p>}
         </div>
-  
     </>
   )
 }

@@ -5,10 +5,9 @@ import { GrLocation } from "react-icons/gr";
 import { MdFlight } from "react-icons/md";
 import { PiBroadcast, PiKeyReturnLight } from "react-icons/pi";
 import { SiTicktick } from "react-icons/si";
-import { MdHotel } from "react-icons/md";
-import { IoRestaurant } from "react-icons/io5";
 import FetchImages from './FetchImages';
-
+import FetchHotels from './FetchHotels';
+import FetchRestaurant from './FetchRestaurant';
 
 
 const DaySection = ({ showDates, final_data, showIndex }) => {
@@ -79,14 +78,9 @@ const DaySection = ({ showDates, final_data, showIndex }) => {
                   {item.name}
                 </p>
                 <div className='flex gap-2 mt-3'>
-            <p className='gap-2 rounded-full w-fit flex items-center border border-gray-200 py-1 px-3 hover:bg-gray-100 hover:shadow-md transition-all duration-200 cursor-pointer'>
-             <MdHotel size={20}/>Hotels
-             </p>
-
-           <p className='gap-2 rounded-full w-fit flex items-center border border-gray-200 py-1 px-3 hover:bg-gray-100 hover:shadow-md transition-all duration-200 cursor-pointer'>
-              <IoRestaurant size={20}/>Restaurant
-             </p>
-
+                <FetchHotels/> 
+                <FetchRestaurant/> 
+                  
                 </div>
                 <p className="text-gray-600 mt-5">{item.description}</p>
                 {item.distance_from_previous_km && (
