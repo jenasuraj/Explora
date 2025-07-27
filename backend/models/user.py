@@ -14,9 +14,7 @@ groq_llm = ChatGroq(
 )
 
 class UserData(BaseModel):
-    description: str
-    days: str
-    radius: str
+    mixed_data:str
 
 
 text_llm = ChatOpenAI(

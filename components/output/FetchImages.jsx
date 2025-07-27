@@ -1,44 +1,44 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
-import axios from 'axios'
-import fallbackImg from '@/assets/sample.png'
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import axios from 'axios';
+
+const fallbackImg = '/sample.png'; // ✅ Direct public folder path
 
 const FetchImages = ({ item }) => {
-  const [imgUrl, setImgUrl] = useState(null)
+  const [imgUrl, setImgUrl] = useState(null);
 
   const fetchImage = async (place) => {
     try {
       const response = await axios.get(
-        `https://api.unsplash.com/search/photos?query=${place}&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_API_KEY }`
-      )
-      const result = response.data.results[0]?.urls?.raw
-      setImgUrl(result || fallbackImg)
+        `https://api.unsplash.com/search/photos?query=${place}&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_API_KEY}`
+      );
+
+      const result = response.data.results[0]?.urls?.regular;
+      setImgUrl(result || fallbackImg);
     } catch (error) {
-      console.log('Error while fetching image from Unsplash!')
-      setImgUrl(fallbackImg)
+      console.error('Error fetching image from Unsplash:', error.message);
+      setImgUrl(fallbackImg);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchImage(item)
-  }, [item])
+    fetchImage(item);
+  }, [item]);
 
   return (
-    <> 
-      <div className="relative aspect-[3/2] w-full rounded-lg overflow-hidden">
-         {imgUrl ?(
-           <Image
-            src={imgUrl}
-            alt="place"
-            fill
-            className="object-cover"
-          />
-         ):<p>Loading image</p>}
-        </div>
-    </>
-  )
-}
+    <div className="relative w-full h-48 rounded-lg overflow-hidden bg-gray-200">
+      <Image
+        src={imgUrl || fallbackImg}
+        alt={item}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, 33vw"
+        priority
+      />
+    </div>
+  );
+};
 
-export default FetchImages
+export default FetchImages;

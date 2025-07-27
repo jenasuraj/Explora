@@ -7,10 +7,9 @@ router = APIRouter()
 
 @router.post("/")
 async def receive(data: UserData):
-    print("data is",data.description)
-    user_data = f"user wants:{data.description} for {data.days}, but the distance and plan should be happen within {data.radius}"
+    print("data is",data.mixed_data)
     initial_state = {
-        "messages": [HumanMessage(content=user_data)],
+        "messages": [HumanMessage(content=data.mixed_data)],
                    }
     result = graph.invoke(initial_state)
     final_data = result["messages"][-1].content
