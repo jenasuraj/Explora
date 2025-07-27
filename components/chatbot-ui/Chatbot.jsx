@@ -53,7 +53,11 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
       const res = await axios.post('http://127.0.0.1:8000', { mixed_data });
       setFirstResponse(true);
       setFormData(prev => ({ ...prev, description: '' }));
-      console.log("Backend Response:", res.data);
+      setFinalData(
+      typeof res.data.final_data === "string"
+      ? JSON.parse(res.data.final_data)
+      : res.data.final_data
+      );
     } catch (error) {
       console.error("Error:", error);
       setErrorMessage("Server error. Try again later.");

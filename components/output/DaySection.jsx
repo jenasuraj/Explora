@@ -9,8 +9,8 @@ import FetchImages from './FetchImages';
 import FetchHotels from './FetchHotels';
 import FetchRestaurant from './FetchRestaurant';
 
-const DaySection = ({ showDates, finalData, showIndex, setFinalData }) => {
-  console.log("data is in daysection", finalData, "showDates:", showDates, "showIndex:", showIndex);
+const DaySection = ({ showDate, finalData, showIndex}) => {
+  console.log("data is in daysection", finalData, "showDates:", showDate, "showIndex:", showIndex);
 
   if (!finalData || !finalData.days) {
     return null;
@@ -23,7 +23,7 @@ const DaySection = ({ showDates, finalData, showIndex, setFinalData }) => {
 
   return (
     <>
-      {!showDates ? (
+      {!showDate ? (
         <section className="w-full min-h-[50vh] bg-white rounded-xl border border-gray-200 shadow-lg p-6 lg:w-2/3 flex flex-col gap-6">
           <header className="bg-gray-50 p-4 rounded-lg border border-gray-100 shadow-sm flex flex-col gap-4">
             <p className="flex items-center gap-3 text-gray-700">
