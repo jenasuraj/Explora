@@ -13,8 +13,11 @@ For ex: a user query like:'i wanna go to best place/show me some best place or e
 prompt = PromptTemplate.from_template(mainPrompt)
 chain = prompt | groq_llm
 def isValid(state:State):
-    user = state["messages"][0].content 
+    print("isValid Node entered --------->1")
+    user = state["messages"][-1].content 
+    print("user query in isvalid node->",user)
     response = chain.invoke({"user":user})
     return{
-        "messages":state["messages"]+[AIMessage(content=response.content)]
+        "messages":state["messages"],
+        "valid":f"{response}"
           }

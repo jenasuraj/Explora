@@ -70,6 +70,7 @@ You are a data structuring assistant. Your task is to convert the given human-re
 prompt = PromptTemplate.from_template(elaborate_prompt)
 chain = prompt | groq_llm
 def elaborate(state:State):
+    print("Entered elaborate state -----------> 3")
     plan = state["messages"][-1].content
     response = chain.invoke({"input":plan})
     return{
