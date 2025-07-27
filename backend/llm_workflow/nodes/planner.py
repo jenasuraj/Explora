@@ -39,10 +39,10 @@ prompt = PromptTemplate.from_template(pro)
 chain = prompt | groq_llm
 
 def planner(state:State):
-    user = state["messages"][0].content
+    print("Entered the planner state.----------->2")
+    print("the state is",state)
+    user = state["messages"]
     response = chain.invoke({"input":user})
     return{
         "messages":state["messages"]+[AIMessage(content=response.content)]
     }
-
-

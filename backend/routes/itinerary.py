@@ -8,10 +8,12 @@ router = APIRouter()
 @router.post("/")
 async def receive(data: UserData):
     print("data is",data.mixed_data)
-    initial_state = {
-        "messages": [HumanMessage(content=data.mixed_data)],
-                   }
-    result = graph.invoke(initial_state)
+    result =  graph.invoke(
+    {"messages": [{"role": "user", "content": f"{data.mixed_data}"}]},
+    {"configurable": {"thread_id": "1"}},
+    )
     final_data = result["messages"][-1].content
     print("final data is",final_data)
     return {"final_data":final_data}
+
+

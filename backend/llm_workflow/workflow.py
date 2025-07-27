@@ -7,12 +7,16 @@ from  llm_workflow.nodes.isvalid import isValid
 from  llm_workflow.nodes.planner import planner
 from  llm_workflow.nodes.elaborate import elaborate
 from llm_workflow.nodes.final import final
+from langgraph.checkpoint.memory import InMemorySaver
 
+checkpointer = InMemorySaver()
 
 def routerFunction(state:State):
-    if "approved" in state["messages"][-1].content:
+    if "approved" in state["valid"]:
+        print("user is valid !")
         return "verified"
     else:
+        print("user is not valid")
         return "not_verified"
 
 
@@ -30,4 +34,4 @@ graph_builder.add_conditional_edges("isValid",routerFunction,{
 graph_builder.add_edge("planner","elaborate")
 graph_builder.add_edge("elaborate","final")
 graph_builder.add_edge("final",END)
-graph = graph_builder.compile()
+graph = graph_builder.compile(checkpointer=checkpointer)
