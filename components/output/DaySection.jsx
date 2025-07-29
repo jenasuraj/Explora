@@ -8,6 +8,8 @@ import { SiTicktick } from "react-icons/si";
 import FetchImages from './FetchImages';
 import FetchHotels from './FetchHotels';
 import FetchRestaurant from './FetchRestaurant';
+import { FaMountainSun } from "react-icons/fa6";
+import Link from 'next/link';
 
 const DaySection = ({ showDate, finalData, showIndex}) => {
   console.log("data is in daysection", finalData, "showDates:", showDate, "showIndex:", showIndex);
@@ -73,10 +75,18 @@ const DaySection = ({ showDate, finalData, showIndex}) => {
                     </div>
                   </div>
                   <div className="flex flex-col gap-2 w-full md:w-2/3">
-                    <p className="inline-flex w-fit items-center gap-2 px-3 py-1 border border-gray-300 rounded-full bg-white text-gray-800">
+                   <div className='flex items-center gap-5'>
+                     <p className="inline-flex w-fit items-center gap-2 px-3 py-1 border border-gray-300 rounded-full bg-white text-gray-800">
                       <GrLocation size={18} />
                       {item.name}
                     </p>
+                    <Link href="/operation/etc">
+                    <p className='w-auto h-auto px-3 py-1 border border-gray-200 rounded-full cursor-pointer gap-2 flex justify-center items-center  
+                    hover:bg-gray-100 hover:shadow-md transition-all duration-200 '>
+                     <FaMountainSun/> See trip
+                    </p>
+                    </Link>
+                   </div>
                     <div className="flex gap-2 mt-3">
                       <FetchHotels />
                       <FetchRestaurant />

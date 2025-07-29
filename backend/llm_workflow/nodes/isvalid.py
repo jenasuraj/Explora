@@ -15,7 +15,6 @@ chain = prompt | groq_llm
 def isValid(state:State):
     print("isValid Node entered --------->1")
     user = state["messages"][-1].content 
-    print("user query in isvalid node->",user)
     response = chain.invoke({"user":user})
     return{
         "messages":state["messages"],

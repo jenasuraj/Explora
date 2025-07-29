@@ -40,7 +40,6 @@ chain = prompt | groq_llm
 
 def planner(state:State):
     print("Entered the planner state.----------->2")
-    print("the state is",state)
     user = state["messages"]
     response = chain.invoke({"input":user})
     return{
