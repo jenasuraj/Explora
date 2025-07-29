@@ -8,15 +8,15 @@ import { SiTicktick } from "react-icons/si";
 import FetchImages from './FetchImages';
 import FetchHotels from './FetchHotels';
 import FetchRestaurant from './FetchRestaurant';
-import { FaMountainSun } from "react-icons/fa6";
-import Link from 'next/link';
+import FetchPlan from './FetchPlan';
+
 
 const DaySection = ({ showDate, finalData, showIndex}) => {
-  console.log("data is in daysection", finalData, "showDates:", showDate, "showIndex:", showIndex);
 
   if (!finalData || !finalData.days) {
     return null;
   }
+  //console.log("day is before",showIndex)
 
   let dayData = null;
   if (showIndex !== null && finalData.days[showIndex]) {
@@ -60,10 +60,13 @@ const DaySection = ({ showDate, finalData, showIndex}) => {
         <section className="w-full flex flex-col gap-6 bg-white p-4 rounded-xl shadow border border-gray-200">
           {dayData ? (
             <>
+              <div className='flex items-center  gap-5'>
               <p className="inline-flex w-fit items-center gap-3 px-4 py-2 bg-gray-600 text-white rounded-full shadow text-base">
                 <WiDaySunny size={30} color="yellow" />
                 {dayData.day}
               </p>
+              <FetchPlan finalData={finalData} showIndex={showIndex}/>
+              </div>  
               {dayData.places && dayData.places.map((item, index) => (
                 <div
                   key={index}
@@ -80,12 +83,7 @@ const DaySection = ({ showDate, finalData, showIndex}) => {
                       <GrLocation size={18} />
                       {item.name}
                     </p>
-                    <Link href="/operation/etc">
-                    <p className='w-auto h-auto px-3 py-1 border border-gray-200 rounded-full cursor-pointer gap-2 flex justify-center items-center  
-                    hover:bg-gray-100 hover:shadow-md transition-all duration-200 '>
-                     <FaMountainSun/> See trip
-                    </p>
-                    </Link>
+               
                    </div>
                     <div className="flex gap-2 mt-3">
                       <FetchHotels />
