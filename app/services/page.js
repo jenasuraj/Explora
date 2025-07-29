@@ -1,12 +1,12 @@
-import Section4 from '@/components/home/Section4'
-import React from 'react'
+import Section5 from '@/components/home/Section5';
+import React from 'react';
 
 const page = () => {
   return (
     <section>
-      <Section4/>
+      <Section5/>
     </section>
-  )
-}
+  );
+};
 
-export default page
+export default page;

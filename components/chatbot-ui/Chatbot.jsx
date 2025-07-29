@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { MdOutlineMessage } from "react-icons/md";
+import { RxCross1 } from "react-icons/rx";
 
 const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -11,6 +13,7 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
     days: '',
     radius: ''
   });
+  const[sideButton,setSidebutton]=useState(false)
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -29,6 +32,7 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
   };
 
   const handleClick = async () => {
+    setSidebutton(false)
     let mixed_data = '';
     setLoading(true);
 
@@ -75,33 +79,48 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
     );
   }
 
-if (firstResponse) {
+  if (firstResponse) {
   return (
-    <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-full px-4 sm:px-6">
-      <div className="mx-auto w-full sm:w-1/2 bg-white shadow-xl border border-gray-300 rounded-xl px-4 py-3">
-        <div className="flex items-center gap-2">
-          <textarea
-            placeholder="Enter next command..."
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            rows={1}
-            className="flex-1 resize-none border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-          />
-          <button
-            className="bg-gray-900 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition duration-200 text-sm"
-            onClick={handleClick}
-          >
-            Send
-          </button>
+    <>
+      {sideButton && (
+        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-full px-4 sm:px-6">
+          <div className="mx-auto w-full sm:w-1/2 px-4 py-3">
+            <div className="flex items-center">
+              <input
+                placeholder="Use Ai to modify your trip !"
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                rows={1}
+                className="flex-1 resize-none border border-gray-400 bg-white text-gray-900 rounded-bl-3xl  rounded-tl-3xl px-3 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+              />
+              <button
+                className="bg-gray-900 text-white border border-black px-6 py-3 rounded-br-3xl  rounded-tr-3xl hover:bg-gray-700 transition duration-200 text-sm"
+                onClick={handleClick}
+              >
+                Send
+              </button>
+            </div>
+            {errorMessage && (
+              <p className="text-red-600 text-xs mt-1 text-center">{errorMessage}</p>
+            )}
+          </div>
         </div>
-        {errorMessage && (
-          <p className="text-red-600 text-xs mt-1 text-center">{errorMessage}</p>
+      )}
+      {/* FAB Toggle Button */}
+      <div
+        className="fixed z-50 bottom-20 right-10 lg:bottom-5 lg:right-5  inline-block cursor-pointer p-4 bg-slate-900 rounded-full"
+        onClick={() => setSidebutton(!sideButton)}>
+        {sideButton ? (
+          <RxCross1 size={20} color="white" />
+        ) : (
+          <MdOutlineMessage size={20} color="white" />
         )}
       </div>
-    </div>
+    </>
   );
 }
+
 
 
 
