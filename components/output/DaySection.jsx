@@ -6,8 +6,6 @@ import { MdFlight } from "react-icons/md";
 import { PiBroadcast, PiKeyReturnLight } from "react-icons/pi";
 import { SiTicktick } from "react-icons/si";
 import FetchImages from './FetchImages';
-import FetchHotels from './FetchHotels';
-import FetchRestaurant from './FetchRestaurant';
 import FetchPlan from './FetchPlan';
 
 
@@ -85,10 +83,7 @@ const DaySection = ({ showDate, finalData, showIndex}) => {
                     </p>
                
                    </div>
-                    <div className="flex gap-2 mt-3">
-                      <FetchHotels />
-                      <FetchRestaurant />
-                    </div>
+                
                     <p className="text-gray-600 mt-5">{item.description}</p>
                     {item.distance_from_previous_km && (
                       <p className="text-sm text-gray-500">
