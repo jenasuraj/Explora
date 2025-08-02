@@ -1,4 +1,4 @@
-import '../app/globals.css'
+import '../app/globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 export const metadata = {
@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-         <nav className="w-11/12 md:w-1/2 fixed top-8 left-1/2 -translate-x-1/2 bg-black text-white p-2 rounded-3xl flex justify-between items-center border border-gray-500 z-50">
+         <nav className="w-12/13 md:w-1/2 fixed top-8 left-1/2 -translate-x-1/2 bg-black text-white p-2 rounded-3xl flex justify-between items-center border border-gray-500 z-50">
              <Navbar/>
             </nav>
          <main className="pt-32 flex justify-center items-center flex-col">
