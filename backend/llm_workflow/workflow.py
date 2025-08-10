@@ -12,12 +12,13 @@ from langgraph.checkpoint.memory import InMemorySaver
 checkpointer = InMemorySaver()
 
 def routerFunction(state:State):
-    if "approved" in state["valid"]:
-        print("user is valid !")
-        return "verified"
-    else:
-        print("user is not valid")
+    #print("i am in router and state is",state)
+    if "not_approved" in state["valid"]:
+        print("user is invalid !")
         return "not_verified"
+    else:
+        print("user is  valid")
+        return "verified"
 
 
 
@@ -34,4 +35,5 @@ graph_builder.add_conditional_edges("isValid",routerFunction,{
 graph_builder.add_edge("planner","elaborate")
 graph_builder.add_edge("elaborate","final")
 graph_builder.add_edge("final",END)
+
 graph = graph_builder.compile(checkpointer=checkpointer)

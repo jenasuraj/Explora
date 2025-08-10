@@ -14,9 +14,10 @@ prompt = PromptTemplate.from_template(mainPrompt)
 chain = prompt | groq_llm
 def isValid(state:State):
     print("isValid Node entered --------->1")
+    print("the state is",state)
+    print("\n\n")
     user = state["messages"][-1].content 
     response = chain.invoke({"user":user})
     return{
-        "messages":state["messages"],
         "valid":f"{response}"
           }

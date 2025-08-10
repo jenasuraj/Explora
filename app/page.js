@@ -1,7 +1,7 @@
-import Section1 from "@/components/home/Section1";
-import Section2 from "@/components/home/Section2";
-import Section3 from "@/components/home/Section3";
-import Section4 from "@/components/home/Section4";
+import Section1 from "@/features/home/components/Section1";
+import Section2 from "@/features/home/components/Section2";
+import Section3 from "@/features/home/components/Section3";
+import Section4 from "@/features/home/components/Section4";
 
 
 export const metadata = {
@@ -17,7 +17,7 @@ export default function Home() {
 <Section1/> 
 <Section2/>
 <Section3/>
-<Section4/>
+<Section4/>   
     </>
   );
 }

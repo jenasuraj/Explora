@@ -83,18 +83,7 @@ const Navbar = () => {
           </li>
         </Link>
 
-        {/* Login */}
-        <Link href="/login">
-          <li>
-            <button
-              className={`${
-                pathname === "/login" ? "text-yellow-400" : "text-white"
-              } flex items-center gap-2 w-full text-left p-3`}
-            >
-              <FaSignInAlt /> Login
-            </button>
-          </li>
-        </Link>
+  
 
         {/* Logout */}
         <Link href="/logout">
