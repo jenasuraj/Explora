@@ -127,17 +127,17 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
   // 👇 Full UI before first response
   return (
     <section className="container mx-auto p-4 sm:p-6 flex justify-center items-center min-h-[50vh] mt-10">
-      <div className="shadow-md flex flex-col gap-5 px-4 sm:px-6 py-6 w-full max-w-2xl border border-gray-200 rounded-xl bg-white">
-        <header className="text-3xl sm:text-4xl text-center font-semibold text-gray-800">
+      <div className=" flex flex-col gap-5 px-4 sm:px-6 py-6 w-full max-w-2xl border border-gray-600 rounded-xl text-white">
+        <header className="text-3xl sm:text-4xl text-center font-semibold ">
           Hey there, {timeGreeting}
         </header>
-        <p className="text-sm sm:text-md text-center text-gray-600">
+        <p className="text-sm sm:text-md text-center ">
           Got confused where to go? I'm here to help. Just give me a command!
         </p>
 
         <textarea
           placeholder="Enter something* (e.g., 'Plan a trip in San Francisco')"
-          className="text-gray-600 w-full min-h-[100px] border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className=" w-full min-h-[100px] border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={formData.description}
           onChange={handleChange}
           name="description"
@@ -150,7 +150,7 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
             name="radius"
             value={formData.radius}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="Trip radius"
           />
           <input
@@ -158,13 +158,13 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
             name="days"
             value={formData.days}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full border border-gray-600 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             aria-label="Trip duration"
           />
         </div>
 
         <button
-          className="w-full bg-gray-900 text-white p-3 rounded-md hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full bg-gray-600 text-white font-bold p-3 rounded-md hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
           onClick={handleClick}
           aria-label="Generate trip plan"
         >
