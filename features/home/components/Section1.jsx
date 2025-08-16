@@ -1,34 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-import {
-  AiFillApple,
-  AiFillAppstore,
-  AiFillChrome,
-  AiFillFacebook,
-  AiFillGoogleCircle,
-  AiFillInstagram,
-  AiFillOpenAI,
-  AiFillLinkedin,
-  AiFillGithub,
-} from "react-icons/ai";
+import  Section1Hooks  from "@/features/home/hooks/Section1Hooks";
 
 const Section1 = () => {
-  const [companyLogo] = useState([
-    { logo: AiFillApple, name: "Apple" },
-    { logo: AiFillAppstore, name: "Microsoft" },
-    { logo: AiFillChrome, name: "Chrome" },
-    { logo: AiFillFacebook, name: "Facebook" },
-    { logo: AiFillGoogleCircle, name: "Google" },
-    { logo: AiFillInstagram, name: "Instagram" },
-    { logo: AiFillOpenAI, name: "OpenAI" },
-    { logo: AiFillLinkedin, name: "LinkedIn" },
-    { logo: AiFillGithub, name: "GitHub" },
-  ]);
+  const companyLogo = Section1Hooks();
 
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
@@ -36,12 +15,12 @@ const Section1 = () => {
 
   return (
     <section
-      className="p-10 min-h-[80vh]  border-2 border-gray-700 w-11/12 max-w-7xl mx-auto rounded-3xl flex flex-col justify-center items-center"
+      className="p-10 min-h-[80vh] border-2 border-gray-700 w-11/12 max-w-7xl mx-auto rounded-3xl flex flex-col justify-center items-center"
       data-aos="zoom-out"
     >
       {/* Heading */}
       <header className="text-white text-center mb-12">
-        <h1 className="text-5xl ">Welcome to Explora.ai</h1>
+        <h1 className="text-5xl">Welcome to Explora.ai</h1>
         <p className="text-lg mt-5 max-w-2xl mx-auto">
           Let our smartest AI pick your perfect destination. Experience travel
           the smarter way. Give it a try and unlock where brilliance takes you.

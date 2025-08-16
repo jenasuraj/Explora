@@ -1,5 +1,5 @@
 import React from 'react'
-import img from '@/assets/abstract.jpg'
+import img from '@/public/abstract.jpg'
 import Image from 'next/image'
 
 const Section4 = () => {
