@@ -12,7 +12,6 @@ from langgraph.checkpoint.memory import InMemorySaver
 checkpointer = InMemorySaver()
 
 def routerFunction(state:State):
-    #print("i am in router and state is",state)
     if "not_approved" in state["valid"]:
         print("user is invalid !")
         return "not_verified"
@@ -21,13 +20,11 @@ def routerFunction(state:State):
         return "verified"
 
 
-
 graph_builder = StateGraph(State)
 graph_builder.add_node("isValid",isValid)
 graph_builder.add_node("planner", planner)
 graph_builder.add_node("elaborate", elaborate)
 graph_builder.add_node("final", final)
-
 graph_builder.add_edge(START, "isValid")
 graph_builder.add_conditional_edges("isValid",routerFunction,{
   "verified":"planner","not_verified":END

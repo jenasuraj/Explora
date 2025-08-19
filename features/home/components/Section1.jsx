@@ -1,5 +1,7 @@
 "use client";
 
+import { PiUserCircleThin } from "react-icons/pi";
+import { CiLogout } from "react-icons/ci";
 import React, { useEffect } from "react";
 import Link from "next/link";
 import AOS from "aos";
@@ -14,6 +16,11 @@ const Section1 = () => {
   }, []);
 
   return (
+<>
+      <div className="gap-5 flex items-center z-50 fixed right-6 top-11 border border-gray-500 py-2 px-4 rounded-full">
+      <CiLogout size={20} color="white"/>
+      <PiUserCircleThin size={25} color="white"/>
+    </div>
     <section
       className="p-10 min-h-[80vh] border-2 border-gray-700 w-11/12 max-w-7xl mx-auto rounded-3xl flex flex-col justify-center items-center"
       data-aos="zoom-out"
@@ -50,6 +57,7 @@ const Section1 = () => {
         </div>
       </div>
     </section>
+</>
   );
 };
 

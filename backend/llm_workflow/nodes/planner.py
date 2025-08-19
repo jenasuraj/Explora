@@ -4,6 +4,8 @@ from models.user import groq_llm,text_llm
 from langchain_core.messages import HumanMessage, AIMessage
 from langgraph.prebuilt import create_react_agent
 from langchain.tools import tool
+import json
+import requests
 
 
 prompt = """You are a highly specialized **Regional Travel Planner and Place Recommender**.
@@ -11,7 +13,6 @@ prompt = """You are a highly specialized **Regional Travel Planner and Place Rec
 Your task is to respond to any kind of user travel request and generate a **precise and efficient route of real places to visit**, based on the following intelligent behavior and strict planning rules.
 
 ---
-
 ### 🧠 Intelligent Deduction Before Planning:
 - If the user provides a **region, country, or vague desire** like "coldest place", "most beautiful spot", or "plan a trip to USA", you must:
   1. **Determine a suitable starting city** using tools or world knowledge (must be well-connected by train/airport).
@@ -60,16 +61,22 @@ Your task is to respond to any kind of user travel request and generate a **prec
 {input}
 """
 
-
 @tool
-def sample(query: str):
-    """Useful for when you need to demonstrate tool usage or handle specific queries."""
+def weather(query: str):
+    """Get current temperature in Celsius for a city or place"""
+    print("weather entered",query)
+    try:
+        response = requests.get(f'https://api.openweathermap.org/data/2.5/weather?q={query}&appid=ba91b7ad5be58d59859387fa376d5ce6&units=metric').json()
+        temp = response['main']['temp']
+        return f"It's currently {temp}°C in {query}"    
+    except Exception as e:
+        return f"Error {e} Couldn't fetch weather for {query}"
 
 
 def planner(state:State):
     print("Entered the planner state.----------->2",state)
     print("\n\n")
-    agent = create_react_agent(model=text_llm,tools=[sample],prompt=prompt)
+    agent = create_react_agent(model=text_llm,tools=[weather],prompt=prompt)
     response = agent.invoke(state)
     print("i am in planner node and response is",response["messages"][-1].content)
     return{

@@ -3,7 +3,7 @@ import { useState } from "react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaUser, FaSignInAlt, FaSignOutAlt, FaLeaf, FaBars } from "react-icons/fa";
+import {  FaLeaf, FaBars } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +11,7 @@ const Navbar = () => {
 
   return (
     <>
+
       <div className="flex items-center justify-between py-2 px-4">
         <Link href="/">
           <ul className="text-2xl text-white ml-2 flex items-center gap-2">
@@ -66,34 +67,6 @@ const Navbar = () => {
               } flex items-center gap-2 w-full text-left p-3`}
             >
               Contact
-            </button>
-          </li>
-        </Link>
-
-        {/* Profile */}
-        <Link href="/profile">
-          <li>
-            <button
-              className={`${
-                pathname === "/profile" ? "text-yellow-400" : "text-white"
-              } flex items-center gap-2 w-full text-left p-3`}
-            >
-              <FaUser /> Profile
-            </button>
-          </li>
-        </Link>
-
-  
-
-        {/* Logout */}
-        <Link href="/logout">
-          <li>
-            <button
-              className={`${
-                pathname === "/logout" ? "text-yellow-400" : "text-white"
-              } flex items-center gap-2 w-full text-left p-3`}
-            >
-              <FaSignOutAlt /> Logout
             </button>
           </li>
         </Link>
