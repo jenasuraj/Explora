@@ -15,7 +15,7 @@ def routerFunction(state:State):
     if "not_approved" in state["valid"]:
         print("user is invalid !")
         return "not_verified"
-    else:
+    elif "approved" in state["valid"]:
         print("user is  valid")
         return "verified"
 

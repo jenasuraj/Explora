@@ -5,17 +5,17 @@ import Link from "next/link";
 
 const AboutPage = () => {
   return (
-    <main className="min-h-screen bg-white text-black px-6 py-20 font-sans">
+    <main className="min-h-screen text-white  px-6 py-20 font-sans">
       {/* Hero Section */}
       <div className="max-w-4xl mx-auto text-center">
         <h1 className="text-4xl font-bold mb-6">What is Explora.ai?</h1>
-        <p className="text-lg text-gray-800 leading-relaxed">
+        <p className="text-lg  leading-relaxed">
           Explora.ai helps you plan smarter trips using AI. Whether you are exploring new places or optimizing
           travel time, our tools adapt to your needs, giving real-time recommendations with intelligent planning.
         </p>
 
         <Link href="/about/more">
-          <button className="mt-10 px-8 py-3 border border-black text-black rounded-full hover:bg-black hover:text-white transition-all duration-200">
+          <button className="rounded-full mt-10 px-8 py-3 cursor-pointer border border-white text-white hover:text-white transition-all duration-200">
             Know a bit more →
           </button>
         </Link>

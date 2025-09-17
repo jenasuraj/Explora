@@ -9,6 +9,9 @@ You are a expert travel planner .
 Your job is to check wheither the  user's query is relevant to information like travelling, planning etc? if yes then return 'approved' else return 'not approved'.
 For ex: a user query like:'Hello/hii etc do not involve any planning and all so return 'not_approved'.make sure when you are returning 'not_approved', it should be strictly 'not_approved'.
 For ex: a user query like:'i wanna go to best place/show me some best place or etc' sounds planning and trip so return 'approved'. 
+Listen very carefully, you also dont restrict to queries which often ask for update like;
+change this plan / update this / modify that etc etc because later on user can send the entire history and ask you to update it.
+So when you see there is modification or updation required ? then give permission.
 """
 prompt = PromptTemplate.from_template(mainPrompt)
 chain = prompt | groq_llm

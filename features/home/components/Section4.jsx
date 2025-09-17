@@ -1,5 +1,5 @@
 import React from 'react'
-import img from '@/public/abstract.jpg'
+import img from '@/public/sam.jpg'
 import Image from 'next/image'
 
 const Section4 = () => {
@@ -13,7 +13,7 @@ const Section4 = () => {
         <h1 className="text-4xl mb-5 sm:text-3xl lg:text-5xl  ">
           Let us abstract the irritation to you
         </h1>
-        <p className="text-base sm:text-lg  leading-relaxed">
+        <p className="text-base sm:text-lg text-gray-400  leading-relaxed">
           Let our AI-powered travel planner design the perfect itinerary for you — whether you're exploring
           ancient landmarks, relaxing on tropical beaches, or discovering hidden gems in bustling cities.
           Just tell us your preferences, and we’ll create a personalized, efficient, and unforgettable
@@ -25,10 +25,11 @@ const Section4 = () => {
         <Image
           src={img}
           alt="AI Travel Planning Illustration"
-          className="rounded-xl object-cover"
+          className="rounded-4xl object-cover"
           width={500}
           height={400}
           priority
+          
         />
       </div>
     </section>

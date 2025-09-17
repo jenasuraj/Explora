@@ -1,12 +1,12 @@
 "use client";
 
-import { PiUserCircleThin } from "react-icons/pi";
-import { CiLogout } from "react-icons/ci";
+import front_img from '@/public/front-img.jpg'
+import Image from 'next/image';
 import React, { useEffect } from "react";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import  Section1Hooks  from "@/features/home/hooks/Section1Hooks";
+import Section1Hooks from "@/features/home/hooks/Section1Hooks";
 
 const Section1 = () => {
   const companyLogo = Section1Hooks();
@@ -16,48 +16,56 @@ const Section1 = () => {
   }, []);
 
   return (
-<>
-      <div className="gap-5 flex items-center z-50 fixed right-6 top-11 border border-gray-500 py-2 px-4 rounded-full">
-      <CiLogout size={20} color="white"/>
-      <PiUserCircleThin size={25} color="white"/>
-    </div>
-    <section
-      className="p-10 min-h-[80vh] border-2 border-gray-700 w-11/12 max-w-7xl mx-auto rounded-3xl flex flex-col justify-center items-center"
-      data-aos="zoom-out"
-    >
-      {/* Heading */}
-      <header className="text-white text-center mb-12">
-        <h1 className="text-5xl">Welcome to Explora.ai</h1>
-        <p className="text-lg mt-5 max-w-2xl mx-auto">
-          Let our smartest AI pick your perfect destination. Experience travel
-          the smarter way. Give it a try and unlock where brilliance takes you.
-        </p>
-        <Link href="/operation">
-          <button className="mt-10 px-8 py-3 bg-white text-black font-semibold rounded-full cursor-pointer hover:bg-gray-600 hover:text-white transition-all duration-300">
-            Let’s explore
-          </button>
-        </Link>
-      </header>
+    <>
+      <section className="relative min-h-[80vh] w-11/12 max-w-7xl rounded-md mx-auto  overflow-hidden flex flex-col justify-center items-center p-10"
+        data-aos="zoom-out">
+        {/* Background image */}
+        <Image
+          src={front_img}
+          alt="Background"
+          fill
+          priority
+          className="object-cover absolute inset-0 "
+        />
 
-      {/* Partners title */}
-      <p className="text-white text-xl font-medium mb-4">🚀 Our Trusted Partners</p>
+        {/* Dark overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/70 z-10"></div>
 
-      {/* Animated Logo Strip */}
-      <div className="w-full overflow-hidden">
-        <div className="flex gap-6 whitespace-nowrap animate-scroll-x">
-          {companyLogo.map((item, index) => (
-            <div
-              key={index}
-              className="flex mt-5 items-center gap-2 bg-gray-800 px-4 py-2 rounded-full text-white shadow-md mx-2 hover:bg-gray-700 transition-all duration-200"
-            >
-              <item.logo size={22} />
-              <p className="text-sm font-medium">{item.name}</p>
+        {/* Content on top of image */}
+        <div className="absolute z-20 flex flex-col justify-center items-center w-full">
+          <header className="text-white text-center mb-12">
+            <h1 className="text-5xl">Welcome to Explora.ai</h1>
+            <p className="text-lg mt-5 max-w-2xl mx-auto">
+              Let our smartest AI pick your perfect destination. Experience travel
+              the smarter way. Give it a try and unlock where brilliance takes you.
+            </p>
+            <Link href="/operation">
+              <button className="mt-10 px-8 py-3 bg-white text-black font-semibold rounded-full cursor-pointer hover:bg-gray-600 hover:text-white transition-all duration-300">
+                Let’s explore
+              </button>
+            </Link>
+          </header>
+
+          {/* Partners title */}
+          <p className="text-white text-xl font-medium mb-4">🚀 Our Trusted Partners</p>
+
+          {/* Animated Logo Strip */}
+          <div className="w-full overflow-hidden">
+            <div className="flex gap-6 whitespace-nowrap animate-scroll-x">
+              {companyLogo.map((item, index) => (
+                <div
+                  key={index}
+                  className="flex mt-5 items-center gap-2 bg-gray-800/70 backdrop-blur-sm px-4 py-2 rounded-full text-white shadow-md mx-2 hover:bg-gray-700 transition-all duration-200"
+                >
+                  <item.logo size={22} />
+                  <p className="text-sm font-medium">{item.name}</p>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </section>
-</>
+      </section>
+    </>
   );
 };
 
