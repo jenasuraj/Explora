@@ -10,33 +10,10 @@ const nextConfig = {
     ],
     domains: ['images.unsplash.com'],
   },
-  eslint: {
-    ignoreDuringBuilds: true,
+    experimental: {
+    optimizeCss: false, // prevents build errors with PostCSS + Tailwind
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-  // COMPLETELY DISABLE CSS PROCESSING
-  webpack: (config, { isServer }) => {
-    // Remove CSS-related loaders
-    config.module.rules = config.module.rules.filter(rule => {
-      if (rule.test && rule.test.toString().includes('css')) {
-        return false;
-      }
-      return true;
-    });
-    
-    // Remove CSS minimization
-    config.optimization.minimizer = config.optimization.minimizer.filter(
-      (minimizer) => minimizer.constructor.name !== 'CssMinimizerPlugin'
-    );
-    
-    return config;
-  },
-  // Disable CSS extraction
-  experimental: {
-    optimizeCss: false,
-  }
+
 };
 
 export default nextConfig;

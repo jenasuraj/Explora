@@ -1,31 +1,24 @@
+/* globals.css */
 @import "tailwindcss";
 
+/* Your custom keyframes */
 @keyframes scroll-left-to-right {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .animate-scroll-x {
   animation: scroll-left-to-right 20s linear infinite;
 }
 
+/* Custom utilities */
 @layer utilities {
   .animate-fadeIn {
     animation: fadeIn 0.5s ease-in-out both;
   }
 
   @keyframes fadeIn {
-    0% {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 }
