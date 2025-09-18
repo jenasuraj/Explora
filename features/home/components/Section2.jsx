@@ -5,36 +5,44 @@ import b1 from '@/public/b1.jpg'
 import { IoLocationSharp } from "react-icons/io5";
 import RenderImages from './RenderImages'
 import Link from 'next/link';
+//data-aos="fade-up" data-aos-duration="3000"
+import { FaArrowRight } from "react-icons/fa";
+import '@/app/globals.css'
 
 const Section2 = () => {
   return (
     <> 
-    <section className="min-h-[70vh] w-10/12 max-w-7xl mx-auto mt-20 text-white shadow-sm rounded-t-3xl
-    rounded-b-2xl px-6 py-10 flex flex-col  items-center justify-between gap-15" 
-    data-aos="fade-up" data-aos-duration="3000">
+    <section className="min-h-[70vh] w-10/12 max-w-7xl mx-auto mt-10  text-white shadow-sm rounded-t-3xl   rounded-b-2xl  py-10 flex flex-col  items-center justify-between gap-15 ">
     
-     <header className='flex-col p-3 gap-5 text-white flex w-full md:gap-5 md:flex-row'>
-     <h1 className='text-2xl w-full text-center md:text-left md:text-5xl md:w-1/2 h-auto'>Experience Earth like never before, Explore its best landscapes</h1>
+     <header className='py-4 border shadow-2xl border-gray-700 rounded-4xl gap-10 p-4 md:border-none flex-col  md:py-0 md:gap-5 text-white flex w-full  md:p-3 md:flex-row '>
+     <h1 className='text-2xl w-full text-center md:text-left md:text-5xl md:w-1/2 h-auto'>Experience Earth like never before, Explore its best landscapes & places</h1>
      <div className='w-full text-center md:text-left flex flex-col md:w-1/2 h-auto gap-5'>
-      <p className='text-sm md:text-lg text-gray-400'>
+      <p className='text-sm md:text-lg text-gray-400 text-center md:text-left'>
       Let our AI-powered travel planner design the perfect itinerary for you whether you're exploring
       ancient landmarks, relaxing on tropical beaches, or discovering hidden gems in bustling cities.
       Just tell us your preferences, and we'll create a personalized, efficient, and unforgettable
       travel experience tailored just for you.
      </p>
-     <div className='ml-6 gap-2 md:ml-0 flex items-center  md:gap-3 '>
-     <button className='bg-white cursor-pointer text-black rounded-full px-4 py-2'><Link href="/operation">Remind me</Link></button>
-     <button className='border cursor-pointer border-gray-400 text-white rounded-full px-4 py-2'><Link href="/about">Learn more</Link></button>
+     <div className='gap-5 md:ml-0 flex justify-center  md:gap-3'>
+     <button className='px-2 py-1 bg-white cursor-pointer text-black rounded-full md:px-4 md:py-2'><Link href="/operation">Remind me</Link></button>
+     <button className='px-2 py-1 border cursor-pointer border-gray-400 text-white rounded-full md:px-4 md:py-2'><Link href="/about">Learn more</Link></button>
      </div> 
      </div>  
      </header>
 
 
-     <div className='w-full flex flex-col gap-5'>
+<p className="flex items-center gap-2 text-white text-sm md:hidden bg-black/40 backdrop-blur-sm px-3 py-2 rounded-full w-fit mx-auto mt-2 shadow-md animate-bounce-x">
+  Scroll right side
+  <FaArrowRight size={14} />
+</p>
+  
+
+     <div className='w-full flex flex-col gap-5'>      
+      
       {/**top-div */}
-      <div className='flex flex-col w-full lg:flex-row gap-10 p-2'>
-         <div className='relative w-full lg:w-2/3 h-[40vh]'>
-           <Image
+      <div className="flex flex-row w-full gap-4 overflow-x-auto lg:overflow-x-visible lg:gap-10 p-2">
+         <div className='flex-shrink-0 relative w-full lg:w-2/3 h-[40vh] '> {/**we use flex shrink because its  a flex child and flex child has 3 properties flex-grow → Can it grow if there’s extra space?flex-shrink → Can it shrink if there’s not enough space? flex-basis → Its starting width/size before growing/shrinking. */}
+          <Image
            src={s1}
            alt='side long image'
            fill
@@ -45,7 +53,7 @@ const Section2 = () => {
              </div>
              <button className='absolute z-10 bottom-6 right-3 backdrop-blur-2xl cursor-pointer text-white border rounded-full border-gray-400 px-2 py-1'>Let's Go</button>
          </div>
-         <div className='relative w-full lg:w-1/3 h-[40vh]'>
+         <div className='relative w-full lg:w-1/3 h-[40vh] flex-shrink-0'>
            <Image
            src={b1}
            alt='side short image'
@@ -56,10 +64,13 @@ const Section2 = () => {
             </div>
          </div>
       </div>
+
+
       {/**low-div */}
-      <div className='flex flex-col w-full md:flex-row gap-10'>
+      <div className="flex flex-row w-full gap-4 overflow-x-auto lg:overflow-x-visible lg:gap-10 p-2">
       <RenderImages/> 
      </div>
+     
      </div>
 
 

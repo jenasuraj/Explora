@@ -16,7 +16,7 @@ const RenderImages = () => {
   <>
   {images.map( (item,index)=>{
     return(
-    <div key={index} className='w-full md:w-1/3 h-[40vh] relative'>
+    <div key={index} className='w-full md:w-1/3 h-[40vh] relative flex-shrink-0'>
          <Image
          src={item.img}
          alt='bottom 1 img'
