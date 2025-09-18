@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {  FaBars, FaCross } from "react-icons/fa";
 import Image from "next/image";
 import img from "@/public/login-page.png";
 import { FcGoogle } from "react-icons/fc";
@@ -133,14 +132,14 @@ const Navbar = () => {
 
                 <button
                   onClick={() => signIn("google")}
-                  className="cursor-pointer flex items-center justify-center gap-2 bg-white text-gray-800 py-3 px-6 rounded-lg hover:bg-gray-100 transition"
+                  className="cursor-pointer flex items-center justify-center gap-2  text-gray-400 border border-gray-500 py-3 px-6 rounded-lg "
                 >
                   Continue with Google <FcGoogle size={25} />
                 </button>
               </div>
 
               {/* Right side image */}
-              <div className="hidden md:flex md:w-1/2 items-center justify-center p-6">
+              <div className=" md:flex md:w-1/2 items-center justify-center py-6">
                 <Image
                   src={img}
                   alt="Login Illustration"
