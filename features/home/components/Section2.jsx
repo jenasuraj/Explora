@@ -15,9 +15,9 @@ const Section2 = () => {
     <section className="min-h-[70vh] w-10/12 max-w-7xl mx-auto mt-10  text-white shadow-sm rounded-t-3xl   rounded-b-2xl  py-10 flex flex-col  items-center justify-between gap-15 " data-aos="fade-up" data-aos-duration="3000">
     
      <header className='py-8 px-5 border shadow-2xl border-gray-700 rounded-4xl gap-10 p-4 md:border-none flex-col  md:py-0 md:gap-5 text-white flex w-full  md:p-3 md:flex-row '>
-     <h1 className='text-2xl w-full text-center md:text-left md:text-5xl md:w-1/2 h-auto'>Experience Earth like never before, Explore its best landscapes & places</h1>
+     <h1 className='text-3xl w-full text-center md:text-left md:text-5xl md:w-1/2 h-auto'>Experience Earth like never before, Explore its best landscapes & places</h1>
      <div className='w-full text-center md:text-left flex flex-col md:w-1/2 h-auto gap-5'>
-      <p className='text-sm md:text-lg text-gray-400 text-center md:text-left'>
+      <p className='text-md md:text-lg text-gray-400 text-center md:text-left'>
       Let our AI-powered travel planner design the perfect itinerary for you whether you're exploring
       ancient landmarks, relaxing on tropical beaches, or discovering hidden gems in bustling cities.
       Just tell us your preferences, and we'll create a personalized, efficient, and unforgettable

@@ -17,7 +17,7 @@ const Section3 = () => {
 return (
 <>
 <section className="min-h-[70vh] w-11/12 sm:w-10/12 max-w-7xl mx-auto mt-10 text-white shadow-sm rounded-t-3xl rounded-b-2xl px-4 sm:px-6 py-8 sm:py-10 flex flex-col items-center justify-center gap-6 sm:gap-10" data-aos="fade-up">
-<header className='text-xl sm:text-2xl md:text-4xl lg:text-5xl text-center'>
+<header className='text-2xl sm:text-2xl md:text-4xl lg:text-5xl text-center'>
   <p >A Selection Of Exceptional Villas <br className="hidden sm:block" /> 
   And hotels</p>
 </header>
