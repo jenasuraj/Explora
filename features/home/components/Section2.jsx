@@ -6,15 +6,15 @@ import { IoLocationSharp } from "react-icons/io5";
 import RenderImages from './RenderImages'
 import Link from 'next/link';
 //data-aos="fade-up" data-aos-duration="3000"
-import { FaArrowRight } from "react-icons/fa";
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import '@/app/globals.css'
 
 const Section2 = () => {
   return (
     <> 
-    <section className="min-h-[70vh] w-10/12 max-w-7xl mx-auto mt-10  text-white shadow-sm rounded-t-3xl   rounded-b-2xl  py-10 flex flex-col  items-center justify-between gap-15 ">
+    <section className="min-h-[70vh] w-10/12 max-w-7xl mx-auto mt-10  text-white shadow-sm rounded-t-3xl   rounded-b-2xl  py-10 flex flex-col  items-center justify-between gap-15 " data-aos="fade-up" data-aos-duration="3000">
     
-     <header className='py-4 border shadow-2xl border-gray-700 rounded-4xl gap-10 p-4 md:border-none flex-col  md:py-0 md:gap-5 text-white flex w-full  md:p-3 md:flex-row '>
+     <header className='py-8 px-5 border shadow-2xl border-gray-700 rounded-4xl gap-10 p-4 md:border-none flex-col  md:py-0 md:gap-5 text-white flex w-full  md:p-3 md:flex-row '>
      <h1 className='text-2xl w-full text-center md:text-left md:text-5xl md:w-1/2 h-auto'>Experience Earth like never before, Explore its best landscapes & places</h1>
      <div className='w-full text-center md:text-left flex flex-col md:w-1/2 h-auto gap-5'>
       <p className='text-sm md:text-lg text-gray-400 text-center md:text-left'>
@@ -31,9 +31,9 @@ const Section2 = () => {
      </header>
 
 
-<p className="flex items-center gap-2 text-white text-sm md:hidden bg-black/40 backdrop-blur-sm px-3 py-2 rounded-full w-fit mx-auto mt-2 shadow-md animate-bounce-x">
+<p className="w-full  border border-gray-700 flex items-center  justify-center gap-2 text-white text-sm md:hidden bg-black/40 backdrop-blur-sm px-3 py-4 rounded-full mx-auto mt-2 shadow-md ">
   Scroll right side
-  <FaArrowRight size={14} />
+  <MdKeyboardDoubleArrowRight color='white' size={25} />
 </p>
   
 

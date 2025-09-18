@@ -18,7 +18,7 @@ return (
 <>
 <section className="min-h-[70vh] w-11/12 sm:w-10/12 max-w-7xl mx-auto mt-10 text-white shadow-sm rounded-t-3xl rounded-b-2xl px-4 sm:px-6 py-8 sm:py-10 flex flex-col items-center justify-center gap-6 sm:gap-10" data-aos="fade-up">
 <header className='text-xl sm:text-2xl md:text-4xl lg:text-5xl text-center'>
-  <p>A Selection Of Exceptional Villas <br className="hidden sm:block" /> 
+  <p >A Selection Of Exceptional Villas <br className="hidden sm:block" /> 
   And hotels</p>
 </header>
 
@@ -55,8 +55,8 @@ return (
 </div>
 
 {/* AI Description Paragraph */}
-<div className="w-full mt-6 px-6 sm:px-0">
-    <p className="text-gray-400 text-lg  px-6 text-center leading-relaxed">
+<div className="w-full mt-6  sm:px-0 border border-gray-700 py-5 px-2 rounded-4xl md:rounded-none md:border-none">
+    <p className="text-gray-400 text-lg text-center leading-relaxed ">
       Our advanced AI technology doesn't just help you find beautiful destinations—it intelligently matches you with 
       perfect accommodations based on your preferences, budget, and travel style. By analyzing thousands of data points 
       from previous travelers, our system recommends hotels and villas that truly fit your needs. Whether you're looking 
