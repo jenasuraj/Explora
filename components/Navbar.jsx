@@ -3,11 +3,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
-import img from "@/public/login-page.png";
-import { FcGoogle } from "react-icons/fc";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { createPortal } from "react-dom";
+import { signOut, useSession } from "next-auth/react";
 import { GiLindenLeaf } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { HiOutlineBars3 } from "react-icons/hi2";
@@ -15,13 +11,11 @@ import { HiOutlineBars3 } from "react-icons/hi2";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showPage, setShowPage] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
   
 
-  // To avoid hydration mismatch with portals
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -30,11 +24,17 @@ const Navbar = () => {
     <>
       {/* Navbar top */}
       <div className="flex items-center w-full justify-between py-2 px-4">
-        <Link href="/">
+        {!session ? (
+          <Link href="/">
           <span className="text-2xl text-white ml-2 flex items-center gap-2 cursor-pointer">
             < GiLindenLeaf color="green" size={25}/> Explora.ai
           </span>
         </Link>
+        ):(
+          <span className="text-2xl text-white ml-2 flex items-center gap-2 cursor-pointer">
+            < GiLindenLeaf color="green" size={25}/> Explora.ai
+          </span>
+        )}
 
         {/* Mobile toggle button */}
         <button className="md:hidden text-white text-2xl mr-2"
@@ -91,67 +91,17 @@ const Navbar = () => {
           {session ? (
             <button
               onClick={() => signOut()}
-              className="text-white p-3"
-            >
+              className=" p-3 text-red-400">
               Logout
             </button>
           ) : (
             <button
-              onClick={() => setShowPage(true)}
-              className="text-white p-3"
-            >
-              Login
+              className="text-white p-3">
+              <Link href="/login_reg">Login</Link>
             </button>
           )}
         </li>
       </ul>
-
-      {/* Modal rendered via portal */}
-      {mounted &&
-        showPage &&
-        !session &&
-        createPortal(
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-            <div className="bg-slate-950 shadow-2xl border border-gray-700 flex flex-col md:flex-row 
-                            items-center justify-between rounded-2xl w-full max-w-4xl h-[80%] 
-                            relative overflow-hidden">
-              
-              {/* Close button */}
-              <button
-                onClick={() => setShowPage(false)}
-                className="absolute top-4 right-4 text-red-500 hover:text-red-800 transition text-xl font-bold">
-                ✕
-              </button>
-
-              {/* Left side */}
-              <div className="flex flex-col text-center items-center justify-center gap-6 p-8 md:w-1/2">
-                <h2 className="text-4xl text-green-500">Welcome To Explora!</h2>
-                <p className="text-green-500">
-                  Login with Google to access your personalized dashboard.
-                </p>
-
-                <button
-                  onClick={() => signIn("google")}
-                  className="cursor-pointer flex items-center justify-center gap-2  text-gray-400 border border-gray-500 py-3 px-6 rounded-lg "
-                >
-                  Continue with Google <FcGoogle size={25} />
-                </button>
-              </div>
-
-              {/* Right side image */}
-              <div className=" md:flex md:w-1/2 items-center justify-center py-6">
-                <Image
-                  src={img}
-                  alt="Login Illustration"
-                  width={350}
-                  height={300}
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </div>,
-          document.body
-        )}
     </>
   );
 };

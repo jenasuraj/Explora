@@ -9,6 +9,9 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+    pages: {
+    signIn: "/login_reg", // 👈 this tells NextAuth to use /login instead of default
+  },
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt", // JWT-based session
