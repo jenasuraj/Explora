@@ -3,12 +3,16 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaLeaf, FaBars } from "react-icons/fa";
+import {  FaBars, FaCross } from "react-icons/fa";
 import Image from "next/image";
 import img from "@/public/login-page.png";
 import { FcGoogle } from "react-icons/fc";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { createPortal } from "react-dom";
+import { GiLindenLeaf } from "react-icons/gi";
+import { RxCross1 } from "react-icons/rx";
+import { HiOutlineBars3 } from "react-icons/hi2";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,6 +20,7 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { data: session } = useSession();
+  
 
   // To avoid hydration mismatch with portals
   useEffect(() => {
@@ -25,19 +30,17 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar top */}
-      <div className="flex items-center justify-between py-2 px-4">
+      <div className="flex items-center w-full justify-between py-2 px-4">
         <Link href="/">
           <span className="text-2xl text-white ml-2 flex items-center gap-2 cursor-pointer">
-            <FaLeaf color="green" /> Explora.ai
+            < GiLindenLeaf color="green" size={25}/> Explora.ai
           </span>
         </Link>
 
         {/* Mobile toggle button */}
-        <button
-          className="md:hidden text-white text-2xl mr-2"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <FaBars />
+        <button className="md:hidden text-white text-2xl mr-2"
+          onClick={() => setIsOpen(!isOpen)}>
+          {!isOpen ? <HiOutlineBars3 size={35}/> : <RxCross1 size={25}/>}
         </button>
       </div>
 
@@ -46,8 +49,8 @@ const Navbar = () => {
         className={`${
           isOpen ? "block" : "hidden"
         } absolute top-20 left-1/2 -translate-x-1/2 bg-black rounded-xl w-10/12 
-          md:static md:flex md:translate-x-0 md:bg-transparent md:w-auto md:items-center text-sm`}
-      >
+          md:static md:flex md:translate-x-0 md:bg-transparent md:w-auto md:items-center text-sm`}>
+            
         <li>
           <Link href="/about" onClick={() => setIsOpen(false)}>
             <button
@@ -117,8 +120,7 @@ const Navbar = () => {
               {/* Close button */}
               <button
                 onClick={() => setShowPage(false)}
-                className="absolute top-4 right-4 text-red-500 hover:text-red-800 transition text-xl font-bold"
-              >
+                className="absolute top-4 right-4 text-red-500 hover:text-red-800 transition text-xl font-bold">
                 ✕
               </button>
 
