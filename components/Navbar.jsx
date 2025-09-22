@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
 import { GiLindenLeaf } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { HiOutlineBars3 } from "react-icons/hi2";
@@ -13,7 +12,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-  const { data: session } = useSession();
   
 
   useEffect(() => {
@@ -24,18 +22,11 @@ const Navbar = () => {
     <>
       {/* Navbar top */}
       <div className="flex items-center w-full justify-between py-2 px-4">
-        {!session ? (
           <Link href="/">
           <span className="text-2xl text-white ml-2 flex items-center gap-2 cursor-pointer">
             < GiLindenLeaf color="green" size={25}/> Explora.ai
           </span>
         </Link>
-        ):(
-          <span className="text-2xl text-white ml-2 flex items-center gap-2 cursor-pointer">
-            < GiLindenLeaf color="green" size={25}/> Explora.ai
-          </span>
-        )}
-
         {/* Mobile toggle button */}
         <button className="md:hidden text-white text-2xl mr-2"
           onClick={() => setIsOpen(!isOpen)}>
@@ -88,18 +79,10 @@ const Navbar = () => {
 
         {/* Login/Logout */}
         <li>
-          {session ? (
-            <button
-              onClick={() => signOut()}
-              className=" p-3 text-red-400">
-              Logout
-            </button>
-          ) : (
             <button
               className="text-white p-3">
               <Link href="/login_reg">Login</Link>
             </button>
-          )}
         </li>
       </ul>
     </>

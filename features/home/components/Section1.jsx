@@ -8,6 +8,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import Section1Hooks from "@/features/home/hooks/Section1Hooks";
 
+
 const Section1 = () => {
   const companyLogo = Section1Hooks();
 
