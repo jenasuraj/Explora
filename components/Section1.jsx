@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Section1Hooks from "@/features/home/hooks/Section1Hooks";
+import Section1Hooks from "@/components/Section1Hooks";
 
 
 const Section1 = () => {

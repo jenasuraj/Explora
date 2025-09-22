@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import React from 'react';
-import Chatbot from '@/features/chatbot/Chatbot';
+import Chatbot from '@/components/Chatbot';
 import DateSection from '@/components/output/DateSection';
 import DaySection from '@/components/output/DaySection';
 
