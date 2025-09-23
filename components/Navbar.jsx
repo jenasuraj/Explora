@@ -24,9 +24,8 @@ const Navbar = () => {
   // Profile dropdown state
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const { signOut } = useUser();
 
-  // Close dropdown if clicked outside
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -39,7 +38,7 @@ const Navbar = () => {
 
   return (
     <ClerkLoaded>
-      <div className="flex items-center w-full justify-between py-2 px-4 bg-black">
+      <div className="flex items-center w-full justify-between py-2 px-4 ">
         {/* Logo */}
         <Link href="/">
           <span className="text-2xl text-white ml-2 flex items-center gap-2 cursor-pointer">
@@ -116,13 +115,13 @@ const Navbar = () => {
                   </button>
                   </SignOutButton>
                   
-                  <Link href="/settings">
                     <button
                       className="cursor-pointer flex text-md  items-center justify-center gap-2 w-full text-left px-4 py-2 "
                       onClick={() => setDropdownOpen(false)}>
+                      <Link href="/profile" className="flex items-center justify-center gap-2">
                       <IoSettingsOutline size={15}/> Settings
+                      </Link>
                     </button>
-                  </Link>
                 </div>
               )}
             </SignedIn>

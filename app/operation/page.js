@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import React from 'react';
+import DaySection from '@/components/output/DaySection';
 import Chatbot from '@/components/Chatbot';
 import DateSection from '@/components/output/DateSection';
-import DaySection from '@/components/output/DaySection';
 
 
 const Page = () => {
