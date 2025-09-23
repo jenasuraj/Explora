@@ -8,7 +8,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    domains: ['images.unsplash.com'],
+    domains: ['images.unsplash.com','res.cloudinary.com'],
   },
     experimental: {
     optimizeCss: false, // prevents build errors with PostCSS + Tailwind
