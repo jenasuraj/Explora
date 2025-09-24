@@ -20,7 +20,7 @@ const Page = () => {
   const [newMember, setNewMember] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState(""); // ✅ New state
-
+  
   const checkUser = async (id) => {
     try {
       const response = await axios.get(`/api/user`, {
@@ -57,8 +57,6 @@ const Page = () => {
         clerkId: user?.id,
         email: user?.primaryEmailAddress?.emailAddress,
       });
-
-      console.log("User created:", response.data);
       setNewMember(false);
     } catch (error) {
       console.error("Error saving user:", error);

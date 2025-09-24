@@ -9,18 +9,18 @@ import { SiTicktick } from "react-icons/si";
 import FetchImages from './FetchImages';
 import FetchPlan from './FetchPlan';
 import { IoCheckmarkDone } from "react-icons/io5";
-import { signIn, signOut, useSession } from "next-auth/react";
 import axios from 'axios';
+import { useUser } from '@clerk/nextjs';
+
 
 const DaySection = ({ slugItem, showDate, finalData, showIndex }) => {
   const [approved, setApproved] = useState(false);
-  const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [id, setId] = useState('');
-
+  const { isSignedIn, isLoaded, user } = useUser();
   // Determine which data source to use
   const data = finalData || slugItem; //this is called fallback logic or default param pattern
-  
+  console.log("id is",id)
   if (!data || !data.days) {
     return null;
   }
@@ -31,21 +31,27 @@ const DaySection = ({ slugItem, showDate, finalData, showIndex }) => {
   }
   
   const handleSubmit = async () => {
+    console.log("clicked")
+    let clerkId = null
+    if(isLoaded && isSignedIn){
+      clerkId = user?.id
+    }
     setLoading(true);
     if (approved) {
-      await axios.delete('/api/crud', { data: { id: id } });
+      await axios.delete('/api/post', { data: { id: id } });
       setApproved(false);
       setId('');
     } else {
       try {
-        const response = await axios.post('/api/crud', {
+        const response = await axios.post('/api/post', {
           finalData: data,
-          email: session?.user?.email,
+          userId:clerkId,
           place: data.starting_point
         });
-        if (response.data.message) {
+        if (response) {
+          console.log("response is",response)
           setApproved(true);
-          setId(response.data.message);
+          setId(response.data.data._id);
         }
       } catch (err) {
         console.log("error sending data to db");
@@ -54,6 +60,7 @@ const DaySection = ({ slugItem, showDate, finalData, showIndex }) => {
     setLoading(false);
   };
 
+  
   return (
     <>
       {!showDate ? (
@@ -107,15 +114,14 @@ const DaySection = ({ slugItem, showDate, finalData, showIndex }) => {
                 <FetchPlan finalData={data} showIndex={showIndex} />
                 
                {!slugItem &&(
-                                <button 
+                <button 
                   className={`inline-flex items-center gap-2 px-5 py-3 rounded-full shadow text-base font-medium transition-all ${
                     approved 
                       ? "bg-red-700 hover:bg-red-600 text-white" 
                       : "bg-blue-700 hover:bg-blue-600 text-white"
                   } ${loading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
                   onClick={handleSubmit}
-                  disabled={loading}
-                >
+                  disabled={loading}>
                   {loading ? (
                     <>
                       <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
