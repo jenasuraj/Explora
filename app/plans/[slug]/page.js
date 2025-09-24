@@ -1,6 +1,8 @@
 import React from 'react'
-import db from '@/lib/db';
+import Post from '@/model/Post';
+import dbConnect from '@/lib/db';
 import PlainWrapper from '@/components/PlainWrapper';
+
 
 export default async function Page({ params }) {
   const { slug } = await params;
@@ -14,12 +16,11 @@ export default async function Page({ params }) {
 }
 
 const fetchSinglePlan = async (slug) => {
+  await dbConnect()
   try {
-    const [rows] = await db.query('SELECT * FROM post WHERE id = ?', [slug]);
-    if (rows && rows.length > 0) {
-      return rows[0].collection;
-    } else {
-      return null;
+    const response = await Post.findById(slug)
+    if(response){
+      return response.post
     }
   } catch (error) {
     console.log("unable to call the fetch call...", error);

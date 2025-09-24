@@ -20,9 +20,10 @@ export default function Page() {
     const fetchAll = async () => {
       setLoading(true)
       try {
-        const response = await axios.get("/api/crud")
-        if (Array.isArray(response.data.message)) {
-          setDataCollections(response.data.message)
+        const response = await axios.get("/api/post")
+        if (Array.isArray(response.data.data)) {
+          console.log(response.data.data)
+          setDataCollections(response.data.data)
         }
       } catch (error) {
         console.log("error in plans")
@@ -43,7 +44,7 @@ export default function Page() {
 
   const filterOperation = () => {
     if(inputData && !showCross){
-      const filteredData = dataCollections.filter((item) => item.place.toLowerCase().includes(inputData.toLowerCase()))
+      const filteredData = dataCollections.filter((item) => item.post.starting_point.toLowerCase().includes(inputData.toLowerCase()))
       setTempArr(filteredData)
       setShowCross(true)
     } else {
@@ -54,7 +55,7 @@ export default function Page() {
   }
 
   const handlePlanClick = (index) => {
-    router.push(`/plans/${dataCollections[index].id}`)
+    router.push(`/plans/${dataCollections[index]._id}`)
   }
 
   return (
@@ -77,25 +78,25 @@ export default function Page() {
       <div className={`${
         loading
           ? "flex min-h-screen w-full justify-center items-center text-5xl"
-          : `grid gap-6 min-h-screen w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 lg:w-2/3 justify-center`}`
-      }>
+          : `grid gap-6 min-h-screen w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 lg:w-2/3 justify-center`}`}>
+
         {loading ? (
           <p className="text-2xl text-white">Loading....</p>
         ) : tempArr.length > 0 ? (
           tempArr.map((item, index) => {
-            const description = item?.collection?.days?.[0]?.places?.[0]?.description
+            const description = item?.post?.days?.[0]?.places?.[0]?.description
             return (
               <div 
                 key={index} 
                 onClick={() => handlePlanClick(index)}
                 className="cursor-pointer relative border text-sm text-gray-300 shadow-2xl border-gray-500 rounded-md transition-transform hover:scale-105"
               >
-                <FetchImages item={item.place} />
+                <FetchImages item={item?.post?.starting_point} />
                 {description && (
                   <div className="gap-2 flex flex-col absolute bottom-0 w-full bg-black/40 backdrop-blur-sm text-white text-xs p-3">
                     <p className="text-white flex text-md font-bold items-center gap-2">
                       <MdPlace size={20} />
-                      {item.place}
+                      {item?.post?.starting_point}
                     </p>
                     <p className="text-gray-200 text-xs">
                       {descriptionFunc(description)}
@@ -109,19 +110,19 @@ export default function Page() {
           <p className="text-white text-3xl col-span-full text-center">Search results empty...</p> 
         ) : dataCollections.length > 0 ? (
           dataCollections.map((item, index) => {
-            const description = item?.collection?.days?.[0]?.places?.[0]?.description
+            const description = item?.post?.days?.[0]?.places?.[0]?.description
             return (
               <div 
                 onClick={() => handlePlanClick(index)}
                 key={index}
                 className="cursor-pointer relative border text-sm text-gray-300 shadow-2xl border-gray-500 rounded-md overflow-hidden transition-transform hover:scale-105"
               >
-                <FetchImages item={item.place} />
+                <FetchImages item={item?.post?.starting_point} />
                 {description && (
                   <div className="gap-2 flex flex-col absolute bottom-0 w-full bg-black/40 backdrop-blur-sm text-white text-xs p-3">
                     <p className="text-white flex text-md font-bold items-center gap-2">
                       <MdPlace size={20} />
-                      {item.place}
+                      {item?.post?.starting_point}
                     </p>
                     <p className="text-gray-200 text-xs">
                       {descriptionFunc(description)}

@@ -2,6 +2,7 @@ import dbConnect from "@/lib/db";
 import Post from "@/model/Post";
 import { NextResponse } from "next/server";
 
+await dbConnect()
 export async function POST(req) {
     const body = await req.json()
     console.log("body is",body.userId)
@@ -34,5 +35,16 @@ export async function DELETE(req) {
     }
     catch(error){
         return NextResponse.json({message:"not delete"},{status:400})
+    } 
+}
+
+
+export async function GET(req) {
+    try{
+        const response = await Post.find();
+        return NextResponse.json({message:"response successfully fetched",data:response},{status:200})
+    }
+    catch(error){
+        return NextResponse.json({message:"issue in fetching "},{status:400})
     } 
 }
