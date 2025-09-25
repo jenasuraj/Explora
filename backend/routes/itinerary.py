@@ -5,6 +5,10 @@ from langchain_core.messages import HumanMessage
 
 router = APIRouter()
 
+@router.get("/")
+async def health_check():
+    return {"status": "ok", "message": "Backend is running 🚀"}
+
 @router.post("/")
 async def receive(data: UserData):
     print("data is",data.mixed_data)
