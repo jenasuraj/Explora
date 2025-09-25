@@ -9,8 +9,9 @@ import { SignedIn } from "@clerk/nextjs";
 import axios from "axios";
 import { FaCheck } from "react-icons/fa";
 import { useUser } from "@clerk/nextjs";
+import { SignInButton } from "@clerk/nextjs";
 
-
+import { SignUpButton } from "@clerk/nextjs";
 const Page = () => {
   const [firstResponse, setFirstResponse] = useState(false);
   const [showIndex, setShowIndex] = useState(null);
@@ -20,6 +21,12 @@ const Page = () => {
   const [newMember, setNewMember] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+
+  if (!isSignedIn){
+                <SignUpButton>
+                
+              </SignUpButton>
+  }
 
   const checkUser = async (id) => {
     try {

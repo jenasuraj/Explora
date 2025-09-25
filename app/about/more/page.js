@@ -4,7 +4,7 @@ const page = () => {
   return (
     <div className='text-white flex flex-col justify-center items-center'>
       <p>Might be interested in some of our other platforms</p>
-      <Link href='/services'>
+      <Link href='/offering'>
    <button className='mt-10 inline-block border border-white rounded-full bg-black px-6 py-1 text-white  cursor-pointer'>Know a bit more about services</button>
       </Link>
 <Link href='/contact'>

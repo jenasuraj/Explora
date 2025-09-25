@@ -8,6 +8,7 @@ import Link from 'next/link';
 //data-aos="fade-up" data-aos-duration="3000"
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import '@/app/globals.css'
+import { SignUpButton } from '@clerk/nextjs';
 
 const Section2 = () => {
   return (
@@ -24,7 +25,7 @@ const Section2 = () => {
       travel experience tailored just for you.
      </p>
      <div className='gap-5 md:ml-0 flex justify-center  md:gap-3'>
-     <button className='px-2 py-1 bg-white cursor-pointer text-black rounded-full md:px-4 md:py-2'><Link href="/operation">Remind me</Link></button>
+     <div className='px-2 py-1 bg-white cursor-pointer text-black rounded-full md:px-4 md:py-2'> <SignUpButton>Remind me</SignUpButton></div>
      <button className='px-2 py-1 border cursor-pointer border-gray-400 text-white rounded-full md:px-4 md:py-2'><Link href="/about">Learn more</Link></button>
      </div> 
      </div>  

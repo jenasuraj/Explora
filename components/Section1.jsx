@@ -7,7 +7,7 @@ import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Section1Hooks from "@/components/Section1Hooks";
-
+import { SignUpButton } from '@clerk/nextjs';
 
 const Section1 = () => {
   const companyLogo = Section1Hooks();
@@ -40,11 +40,11 @@ const Section1 = () => {
               Let our smartest AI pick your perfect destination. Experience travel
               the smarter way. Give it a try and unlock where brilliance takes you.
             </p>
-            <Link href="/operation">
-              <button className="mt-10 px-8 py-3 bg-white text-black font-semibold rounded-full cursor-pointer hover:bg-gray-600 hover:text-white transition-all duration-300">
-                Let’s explore
-              </button>
-            </Link>
+             <SignUpButton>
+               <div className="rounded-sm mt-10 px-5 py-3 border border-gray-400 text-lg text-white font-semibold cursor-pointer hover:bg-white hover:text-black transit duration-300 ">
+                Let's explore
+              </div>
+             </SignUpButton>
           </header>
 
           {/* Partners title */}
