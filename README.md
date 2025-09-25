@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="public/front-img.jpg" width="900px" alt="profile">
+    <img src="public/front-img.jpg" width="900px" height="300px" alt="profile">
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@ Explora.ai is a full-stack AI-powered travel planner that helps users create per
 | Component-2          | Backend API     | Handles itinerary requests and user interactions | FastAPI, Express, Python                      |
 | Component-3          | Authentication  | User account creation and login                 | Clerk                                         |
 | Component-4          | Database        | Store user info and itineraries                 | MongoDB                                       |
-| Component-5          | AI Planner      | Generate structured travel plans based on user input | LangGraph nodes                            |
+| Component-5          | AI Planner      | Generate structured travel plans based on user input | LangGraph                          |
 | Component-6          | Integration     | Connect frontend and backend seamlessly         | Axios, REST APIs                              |
 | Component-7          | Deployment      | Hosting and running the full-stack app         | Vercel (frontend), Render (backend)          |
 
@@ -42,7 +42,7 @@ Explora.ai is a full-stack AI-powered travel planner that helps users create per
 </br>
 
 ## 🛠 Installation 
----
+
 ### 1. Clone the Repository
 ```bash
 git clone git@github.com:jenasuraj/Explora.git
