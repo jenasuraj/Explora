@@ -9,6 +9,8 @@ import { SignedIn } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { FaCheck } from "react-icons/fa";
+import { useUser } from "@clerk/nextjs";
+
 
 const Page = () => {
   const [firstResponse, setFirstResponse] = useState(false);
@@ -16,11 +18,10 @@ const Page = () => {
   const [finalData, setFinalData] = useState({});
   const [showDate, setShowDate] = useState(false);
   const { isSignedIn, isLoaded, user } = useUser();
-
   const [newMember, setNewMember] = useState(false);
   const [name, setName] = useState("");
-  const [description, setDescription] = useState(""); // ✅ New state
-  
+  const [description, setDescription] = useState("");
+
   const checkUser = async (id) => {
     try {
       const response = await axios.get(`/api/user`, {
@@ -44,16 +45,16 @@ const Page = () => {
     }
   }, [isLoaded, isSignedIn, user]);
 
+  
   const handleNameSubmit = async () => {
     if (!name.trim()) {
       alert("Please enter your name");
       return;
     }
-
     try {
       const response = await axios.post("/api/user", {
         name,
-        description, // ✅ send description too
+        description,
         clerkId: user?.id,
         email: user?.primaryEmailAddress?.emailAddress,
       });
