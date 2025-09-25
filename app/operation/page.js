@@ -6,7 +6,6 @@ import DaySection from "@/components/output/DaySection";
 import Chatbot from "@/components/Chatbot";
 import DateSection from "@/components/output/DateSection";
 import { SignedIn } from "@clerk/nextjs";
-import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { FaCheck } from "react-icons/fa";
 import { useUser } from "@clerk/nextjs";
