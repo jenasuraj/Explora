@@ -129,7 +129,7 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
 
   // 👇 Full UI before first response
   return (
-    <section className="container mx-auto p-4 sm:p-6 flex justify-center flex-col items-center min-h-[50vh] mt-10">
+    <section className="container mx-auto p-4 sm:p-6 flex justify-center flex-col items-center min-h-[50vh] mt-2">
       <div className=" flex flex-col gap-5 px-4 sm:px-6 py-6 w-full max-w-2xl border border-gray-600 rounded-xl text-white">
         <header className="text-3xl sm:text-4xl text-center font-semibold ">
           Hey there, {timeGreeting}
@@ -175,11 +175,10 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
         </button>
 
 
-        <div className="w-full text-center bg-gray-600 text-white  p-3 rounded-md hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <Link href="/plans">
+    
+        <Link href="/plans" className="w-full text-center bg-gray-600 text-white  p-3 rounded-md hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
         See the other journey's ...
         </Link>
-      </div>
         {errorMessage && <p className="text-red-600 text-center">{errorMessage}</p>}
       </div>
 

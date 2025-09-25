@@ -59,8 +59,8 @@ export default function Page() {
   }
 
   return (
-    <section className="flex flex-col justify-center items-center w-full min-h-screen">
-      <div className="flex items-center my-6">
+    <section className="flex flex-col justify-center items-center w-full min-h-screen ">
+      <div className="flex items-center mt-2">
         <input 
           placeholder="Find your favorite place !" 
           value={inputData}
@@ -78,7 +78,7 @@ export default function Page() {
       <div className={`${
         loading
           ? "flex min-h-screen w-full justify-center items-center text-5xl"
-          : `grid gap-6 min-h-screen w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-10 lg:w-2/3 justify-center`}`}>
+          : `grid gap-6 h-auto w-full grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:mt-5  p-3 lg:w-2/3 justify-center `}`}>
 
         {loading ? (
           <p className="text-2xl text-white">Loading....</p>

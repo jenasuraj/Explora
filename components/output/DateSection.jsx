@@ -36,7 +36,7 @@ const DateSection = ({ finalData, setShowDate, setShowIndex,slugItem }) => {
   return (
     <>
     {finalData && finalData.days ?(
-      <div className="w-full min-h-[10vh] bg-gray-900 rounded-xl border border-gray-700 shadow-lg p-5 lg:w-1/3">
+      <div className="w-full min-h-[10vh] bg-gray-900 rounded-xl border border-gray-700 shadow-lg p-3 md:p-5 lg:w-1/3">
       <div className="mb-4 border-b border-gray-700 pb-3">
         <h2 className="text-xl font-semibold text-white flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
@@ -101,7 +101,7 @@ const DateSection = ({ finalData, setShowDate, setShowIndex,slugItem }) => {
       )}
     </div>
     ):slugItem && slugItem.days ?(
-      <div className="w-full min-h-[10vh] bg-gray-900 rounded-xl border border-gray-700 shadow-lg p-5 lg:w-1/3">
+      <div className="w-full min-h-[10vh] bg-gray-900 rounded-xl border border-gray-700 p-5 shadow-lg  lg:w-1/3">
       <div className="mb-4 border-b border-gray-700 pb-3">
         <h2 className="text-xl font-semibold text-white flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">

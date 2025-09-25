@@ -109,7 +109,7 @@ const Page = () => {
           setFinalData={setFinalData}
         />
         {firstResponse && (
-          <div className="w-full min-h-screen flex flex-col lg:flex-row p-6 gap-5">
+          <div className="w-full min-h-screen flex flex-col lg:flex-row p-2 gap-5">
             <DateSection
               finalData={finalData}
               setShowDate={setShowDate}

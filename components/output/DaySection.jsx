@@ -64,7 +64,7 @@ const DaySection = ({ slugItem, showDate, finalData, showIndex }) => {
   return (
     <>
       {!showDate ? (
-        <section className="w-full min-h-[50vh] bg-gray-900 rounded-xl border border-gray-700 shadow-lg p-6 lg:w-2/3 flex flex-col gap-6">
+        <section className="w-full min-h-[50vh] bg-gray-900 rounded-xl border border-gray-700 shadow-lg p-3 md:p-5 lg:w-2/3 flex flex-col gap-6">
           <header className="bg-gray-800 p-6 rounded-lg border border-gray-700 shadow-sm flex flex-col gap-5">
             <p className="flex items-center gap-3 text-gray-200">
               <MdFlight size={22} className="text-blue-400" />
@@ -146,12 +146,10 @@ const DaySection = ({ slugItem, showDate, finalData, showIndex }) => {
                 {dayData.places && dayData.places.map((item, index) => (
                   <div
                     key={index}
-                    className="flex flex-col md:flex-row gap-6 bg-gray-800 border border-gray-700 p-5 rounded-xl shadow-md hover:bg-gray-750 transition-colors"
-                  >
-                    <div className="w-full md:w-2/5">
-                      <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden bg-gray-700 shadow">
+                    className="flex flex-col md:flex-row gap-6 bg-gray-800 border border-gray-700 p-3 md:p-5 rounded-xl shadow-md hover:bg-gray-750 transition-colors">
+                    <div className="w-full md:w-2/5 h-auto">
+                      <div className=" w-full rounded-lg overflow-hidden bg-gray-700 shadow">
                         <FetchImages item={item.name} />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 to-transparent opacity-80"></div>
                       </div>
                     </div>
                     
