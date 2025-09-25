@@ -55,7 +55,7 @@ const Chatbot = ({firstResponse,setFirstResponse,finalData,setFinalData}) => {
 
     setErrorMessage('');
     try {
-      const res = await axios.post('http://127.0.0.1:8000', { mixed_data });
+      const res = await axios.post('https://explora-backend-k0e5.onrender.com/', { mixed_data });
       setFirstResponse(true);
       setFormData(prev => ({ ...prev, description: '' }));
       setFinalData(
